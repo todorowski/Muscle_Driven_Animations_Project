@@ -624,15 +624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba41081dd5f56f47b87635bca870fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb1: {fileID: 150785237}
-  rb2: {fileID: 1878035234}
-  a1: {fileID: 1784182514}
-  a2: {fileID: 1563549044}
-  strength: 15
-  targetLength: 1.248281
-  Kp: 5
-  Kd: 0.05
-  Ki: 0
 --- !u!1 &153625368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,12 +1581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23665504a42167941a135fe222080b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biceps1: {fileID: 22276510}
-  biceps2: {fileID: 1825656578}
-  triceps1: {fileID: 1784182514}
-  triceps2: {fileID: 1563549044}
-  shoulder1: {fileID: 668513122}
-  shoulder2: {fileID: 722714836}
 --- !u!114 &305129719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1608,30 +1593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1a6ed5403017a4490461308bb891c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body1: {fileID: 150785237}
-  body2: {fileID: 1878035234}
-  body3: {fileID: 1863706531}
-  bicepsAttachmentPoint1: {fileID: 22276510}
-  bicepsAttachmentPoint2: {fileID: 1825656578}
-  tricepsAttachmentPoint1: {fileID: 1784182514}
-  tricepsAttachmentPoint2: {fileID: 1563549044}
-  shoulderAttachmentPoint1: {fileID: 668513122}
-  shoulderAttachmentPoint2: {fileID: 722714836}
-  bicepsStrength: 20
-  tricepsStrength: 15
-  shoulderStrength: 20
-  bicepsKp: 0.1
-  bicepsKd: 0.5
-  bicepsKi: 0
-  tricepsKp: 5
-  tricepsKd: 0.05
-  tricepsKi: 0
-  shoulderKp: 0.7
-  shoulderKd: 0.01
-  shoulderKi: 0
-  targetLengthBiceps: 1.372407
-  targetLengthTriceps: 1.248281
-  targetLengthShoulder: 0.8705181
 --- !u!4 &305129720
 Transform:
   m_ObjectHideFlags: 0
@@ -1661,7 +1622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5667aa25ec6c24098e591008c2f553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g: {fileID: 305129717}
 --- !u!1 &347508867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,9 +1818,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationObject: {fileID: 11400000, guid: fbfc63809051e55449afd68c48b3f7f2, type: 2}
   ragdoll: {fileID: 374951077}
-  animationHead: 0
   showCoM: {fileID: 0}
   footEdges: []
+  animationHead: 0
 --- !u!114 &374951079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1924,30 +1884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1a6ed5403017a4490461308bb891c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body1: {fileID: 1350002109}
-  body2: {fileID: 356388873}
-  body3: {fileID: 1700177584}
-  bicepsAttachmentPoint1: {fileID: 803349946}
-  bicepsAttachmentPoint2: {fileID: 1339333913}
-  tricepsAttachmentPoint1: {fileID: 1087643394}
-  tricepsAttachmentPoint2: {fileID: 1793360157}
-  shoulderAttachmentPoint1: {fileID: 52109856}
-  shoulderAttachmentPoint2: {fileID: 1278326522}
-  bicepsStrength: 20
-  tricepsStrength: 15
-  shoulderStrength: 20
-  bicepsKp: 0.1
-  bicepsKd: 0.5
-  bicepsKi: 0
-  tricepsKp: 5
-  tricepsKd: 0.05
-  tricepsKi: 0
-  shoulderKp: 0.7
-  shoulderKd: 0.01
-  shoulderKi: 0
-  targetLengthBiceps: 1.372407
-  targetLengthTriceps: 1.248281
-  targetLengthShoulder: 0.8705181
 --- !u!114 &383026758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1960,12 +1896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23665504a42167941a135fe222080b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biceps1: {fileID: 803349946}
-  biceps2: {fileID: 1339333913}
-  triceps1: {fileID: 1087643394}
-  triceps2: {fileID: 1793360157}
-  shoulder1: {fileID: 52109856}
-  shoulder2: {fileID: 1278326522}
 --- !u!1 &385101919
 GameObject:
   m_ObjectHideFlags: 0
@@ -7985,6 +7915,120 @@ Transform:
   m_Father: {fileID: 1679022131}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1250234807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1250234809}
+  - component: {fileID: 1250234808}
+  - component: {fileID: 1250234810}
+  - component: {fileID: 1250234811}
+  - component: {fileID: 1250234812}
+  m_Layer: 3
+  m_Name: SupportPolyGen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1250234808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250234807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f0c54c68f7af14b9d16a1f7029e3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticePositions:
+  - {fileID: 1860524402}
+  - {fileID: 1472380577}
+  - {fileID: 1387566903}
+  - {fileID: 1251610185}
+--- !u!4 &1250234809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250234807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1250234810
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250234807}
+  m_Mesh: {fileID: 0}
+--- !u!64 &1250234811
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250234807}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!23 &1250234812
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250234807}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1251610184
 GameObject:
   m_ObjectHideFlags: 0
@@ -9570,7 +9614,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5667aa25ec6c24098e591008c2f553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g: {fileID: 1517358124}
 --- !u!114 &1517358126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9585,9 +9628,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationObject: {fileID: 0}
   ragdoll: {fileID: 0}
-  animationHead: 0
   showCoM: {fileID: 0}
   footEdges: []
+  animationHead: 0
 --- !u!4 &1517358128
 Transform:
   m_ObjectHideFlags: 0
@@ -11351,9 +11394,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationObject: {fileID: 11400000, guid: e912d01aac935974d860d81685b64054, type: 2}
   ragdoll: {fileID: 1768375021}
-  animationHead: 0
   showCoM: {fileID: 0}
   footEdges: []
+  animationHead: 0
 --- !u!4 &1768375021
 Transform:
   m_ObjectHideFlags: 0
@@ -12374,15 +12417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba41081dd5f56f47b87635bca870fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb1: {fileID: 1863706531}
-  rb2: {fileID: 150785237}
-  a1: {fileID: 668513122}
-  a2: {fileID: 722714836}
-  strength: 20
-  targetLength: 0.8705181
-  Kp: 0.7
-  Kd: 0.01
-  Ki: 0
 --- !u!1 &1872639340
 GameObject:
   m_ObjectHideFlags: 0
@@ -12677,15 +12711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba41081dd5f56f47b87635bca870fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb1: {fileID: 150785237}
-  rb2: {fileID: 1878035234}
-  a1: {fileID: 22276510}
-  a2: {fileID: 1825656578}
-  strength: 20
-  targetLength: 1.372407
-  Kp: 0.1
-  Kd: 0.5
-  Ki: 0
 --- !u!59 &1878035240
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -13362,13 +13387,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationObject: {fileID: 11400000, guid: 71b2bfe79f4aeb343b7c816abfc6989a, type: 2}
   ragdoll: {fileID: 1909042310}
-  animationHead: 0
   showCoM: {fileID: 917897646}
   footEdges:
   - {fileID: 1860524402}
   - {fileID: 1472380577}
   - {fileID: 1387566903}
   - {fileID: 1251610185}
+  animationHead: 0
 --- !u!4 &1909042310
 Transform:
   m_ObjectHideFlags: 0
@@ -13418,9 +13443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213989c49058b27458d8b73c79e75eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodiesToActivate:
-  - {fileID: 383026755}
-  - {fileID: 0}
 --- !u!4 &1909917005
 Transform:
   m_ObjectHideFlags: 0

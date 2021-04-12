@@ -24,7 +24,11 @@ public class MuscleAnimationController : MonoBehaviour
         Debug.Log(footEdges[0].transform.position);
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
-        CalculateSupportPolygon();
+    }
+
+    void LateUpdate()
+    {
+        DrawSupportPolygon(footEdges);
     }
 
     void FixedUpdate()
@@ -32,10 +36,11 @@ public class MuscleAnimationController : MonoBehaviour
         CalculateCenterOfMass();
         showCoM.transform.position = CoM;
 
-        bool balanced1 = IsCoMBalanced(CoM, footEdges[0].position, footEdges[1].position, footEdges[2].position);
-        bool balanced2 = IsCoMBalanced(CoM, footEdges[0].position, footEdges[3].position, footEdges[2].position);
+        CheckIfCoMIsBalanced();
+
+        bool balanced1 = IsCoMBalanced(new Vector3(CoM.x, 0.0f, CoM.z), footEdges[0].position, footEdges[1].position, footEdges[2].position);
+        bool balanced2 = IsCoMBalanced(new Vector3(CoM.x, 0.0f, CoM.z), footEdges[0].position, footEdges[3].position, footEdges[2].position);
         if (balanced1 || balanced2) isBalanced = true;
-        Debug.Log(isBalanced);
 
         //Set target length according to anim curve and activate muscles
         foreach (MuscleAnimationStruct mStruct in animationObject.muscles)
@@ -70,17 +75,26 @@ public class MuscleAnimationController : MonoBehaviour
         return CoM;
     }
 
-    void CalculateSupportPolygon()
+    void CheckIfCoMIsBalanced()
     {
-        Vector3 line1 = footEdges[0].transform.position - footEdges[1].transform.position;
-        Vector3 line2 = footEdges[1].transform.position - footEdges[2].transform.position;
-        Vector3 line3 = footEdges[2].transform.position - footEdges[3].transform.position;
-        Vector3 line4 = footEdges[3].transform.position - footEdges[0].transform.position;
+        RaycastHit hit;
+        if(Physics.Raycast(CoM, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
+        {
+            Debug.Log("balanced");
+        }
+        else
+        {
+            Debug.Log("Not balanced");
+        }
+        Debug.DrawRay(CoM, Vector3.down, Color.cyan);
+    }
 
-        Debug.DrawLine(footEdges[0].position, footEdges[1].position, Color.magenta, 5.0f);
-        Debug.DrawLine(footEdges[1].position, footEdges[2].position, Color.magenta, 5.0f);
-        Debug.DrawLine(footEdges[2].position, footEdges[3].position, Color.magenta, 5.0f);
-        Debug.DrawLine(footEdges[3].position, footEdges[0].position, Color.magenta, 5.0f);
+    void DrawSupportPolygon(Transform[] points)
+    {
+        for(int i = 0; i < points.Length; i++)
+        {
+            Debug.DrawLine(points[i].position, points[(i + 1) % points.Length].position, Color.magenta);
+        }
     }
 
     float Sign(Vector3 c, Vector3 p1, Vector3 p2)
