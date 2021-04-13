@@ -14,13 +14,16 @@ public class SupportPolygonGenerator : MonoBehaviour
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+        
+        CreateShape();
+        UpdateMesh();
+
         GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
     void FixedUpdate()
     {
-        CreateShape();
-        UpdateMesh();
+        
     }
 
     void CreateShape()

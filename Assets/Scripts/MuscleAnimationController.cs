@@ -8,8 +8,12 @@ public class MuscleAnimationController : MonoBehaviour
 {
     public MuscleAnimation animationObject;
     public Transform ragdoll;
-    public GameObject showCoM;
+    //public GameObject showCoM;
     public Transform[] footEdges;
+    public Transform origin;
+
+    public Transform forcePos;
+    public Transform forcePos2;
 
     //Start of the animation timeline
     public float animationHead = 0.0f;
@@ -24,24 +28,24 @@ public class MuscleAnimationController : MonoBehaviour
         Debug.Log(footEdges[0].transform.position);
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
+
+        
     }
 
     void LateUpdate()
     {
-        DrawSupportPolygon(footEdges);
+        CheckIfCoMIsBalanced();
+    }
+
+    void Update()
+    {
+        
+        CalculateCenterOfMass();
+        Test2();
     }
 
     void FixedUpdate()
     {
-        CalculateCenterOfMass();
-        showCoM.transform.position = CoM;
-
-        CheckIfCoMIsBalanced();
-
-        bool balanced1 = IsCoMBalanced(new Vector3(CoM.x, 0.0f, CoM.z), footEdges[0].position, footEdges[1].position, footEdges[2].position);
-        bool balanced2 = IsCoMBalanced(new Vector3(CoM.x, 0.0f, CoM.z), footEdges[0].position, footEdges[3].position, footEdges[2].position);
-        if (balanced1 || balanced2) isBalanced = true;
-
         //Set target length according to anim curve and activate muscles
         foreach (MuscleAnimationStruct mStruct in animationObject.muscles)
         {
@@ -55,6 +59,8 @@ public class MuscleAnimationController : MonoBehaviour
             }
         }
         animationHead += Time.fixedDeltaTime;
+
+     
     }
 
     //Check if CoM is balanced
@@ -78,43 +84,47 @@ public class MuscleAnimationController : MonoBehaviour
     void CheckIfCoMIsBalanced()
     {
         RaycastHit hit;
-        if(Physics.Raycast(CoM, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
+        if(Physics.Raycast(CoM, -origin.up, out hit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
         {
             Debug.Log("balanced");
         }
-        else
+        Debug.DrawRay(CoM, -origin.up, Color.cyan);
+    }
+
+    void Test()
+    {
+        if (Input.GetKey(KeyCode.E))
         {
-            Debug.Log("Not balanced");
+            foreach (MuscleAnimationStruct mStruct in animationObject.muscles)
+            {
+                foreach (MuscleWithAnim m in ragdollMuscles)
+                {
+                    if (m.name == "Ankle1")
+                    {
+                        Debug.Log("HEEEEEEEEJ");
+                        m.targetLength = 100f;
+                        m.Activate();
+                    }
+                }
+            }
         }
-        Debug.DrawRay(CoM, Vector3.down, Color.cyan);
     }
 
-    void DrawSupportPolygon(Transform[] points)
+    void Test2()
     {
-        for(int i = 0; i < points.Length; i++)
+        GameObject g = GameObject.Find("LowerLeg1");
+        Rigidbody rb = g.GetComponent<Rigidbody>();
+        if (Input.GetKey(KeyCode.E))
         {
-            Debug.DrawLine(points[i].position, points[(i + 1) % points.Length].position, Color.magenta);
+            rb.AddForceAtPosition(-transform.right * 50f, forcePos.position);
         }
-    }
 
-    float Sign(Vector3 c, Vector3 p1, Vector3 p2)
-    {
-        return (c.x - p2.x) * (p1.y - p2.y) - (p2.x - p1.x) * (c.y - p2.y);
-    }
-
-    bool IsCoMBalanced(Vector3 c, Vector3 v1, Vector3 v2, Vector3 v3)
-    {
-        float d1, d2, d3;
-        bool positive, negative;
-
-        d1 = Sign(c, v1, v2);
-        d2 = Sign(c, v2, v3);
-        d3 = Sign(c, v3, v1);
-
-        negative = (d1 < 0) || (d2 < 0) || (d3 < 0);
-        positive = (d1 > 0) || (d2 > 0) || (d3 > 0);
-
-        return !(negative && positive);
+        GameObject g2 = GameObject.Find("LowerLeg2");
+        Rigidbody rb2 = g2.GetComponent<Rigidbody>();
+        if (Input.GetKey(KeyCode.R))
+        {
+            rb2.AddForceAtPosition(-transform.right * 70f, forcePos2.position);
+        }
     }
 }
 
