@@ -22,26 +22,39 @@ public class MuscleAnimationController : MonoBehaviour
     List<MuscleWithAnim> ragdollMuscles = new List<MuscleWithAnim>();
     List<Rigidbody> rigidbodyList;
     bool isBalanced;
+
+    public Transform footPos1;
+    public Transform footPos2;
+
+    GameObject test; 
+    Rigidbody tb;
     
     void Start()
     {
         Debug.Log(footEdges[0].transform.position);
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
+        test = GameObject.Find("Body");
+        tb = test.GetComponent<Rigidbody>();
 
         
     }
 
     void LateUpdate()
     {
-        CheckIfCoMIsBalanced();
+        
     }
 
     void Update()
     {
-        
+        //tb.AddForceAtPosition(Vector3.up * (150f), origin.transform.position);
         CalculateCenterOfMass();
         Test2();
+
+        CheckIfCoMIsBalanced();
+
+        Vector3 CoMVector = CoM - footPos1.position;
+        Debug.DrawLine(CoM, footPos1.position - CoM, Color.red);
     }
 
     void FixedUpdate()
@@ -88,6 +101,10 @@ public class MuscleAnimationController : MonoBehaviour
         {
             Debug.Log("balanced");
         }
+        else
+        {
+            Debug.Log("Not balanced");
+        }
         Debug.DrawRay(CoM, -origin.up, Color.cyan);
     }
 
@@ -116,14 +133,51 @@ public class MuscleAnimationController : MonoBehaviour
         Rigidbody rb = g.GetComponent<Rigidbody>();
         if (Input.GetKey(KeyCode.E))
         {
-            rb.AddForceAtPosition(-transform.right * 50f, forcePos.position);
+            rb.AddForceAtPosition(-transform.right * 10f, forcePos.position);
         }
 
         GameObject g2 = GameObject.Find("LowerLeg2");
         Rigidbody rb2 = g2.GetComponent<Rigidbody>();
         if (Input.GetKey(KeyCode.R))
         {
-            rb2.AddForceAtPosition(-transform.right * 70f, forcePos2.position);
+            rb2.AddForceAtPosition(-transform.right * 10f, forcePos2.position);
+        }
+    }
+
+    void rebalance(Transform pos1, Transform pos2, Transform CoM)
+    {
+        Vector3 newPos = new Vector3(0,0,0);
+
+        if(pos1.position.magnitude - CoM.position.magnitude > pos2.position.magnitude - CoM.position.magnitude)
+        {
+            
+        }
+
+  
+
+        Vector3 targetPosition = new Vector3();
+        GameObject g = GameObject.Find("LowerLeg1");
+        Rigidbody rb = g.GetComponent<Rigidbody>();
+
+        GameObject g2 = GameObject.Find("LowerLeg2");
+        Rigidbody rb2 = g2.GetComponent<Rigidbody>();
+
+        if(rb.transform.position != footPos1.position)
+        {
+            rb.AddForceAtPosition(-(rb.transform.position - footPos1.position) * 30f, forcePos.position);
+        }
+        else
+        {
+            Debug.Log("At pos");
+        }
+
+        if (rb2.transform.position != footPos2.position)
+        {
+            rb2.AddForceAtPosition(-(rb2.transform.position - footPos2.position) * 30f, forcePos2.position);
+        }
+        else
+        {
+            Debug.Log("At pos");
         }
     }
 }

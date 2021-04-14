@@ -170,7 +170,7 @@ MonoBehaviour:
   rb2: {fileID: 1229251274}
   a1: {fileID: 494432300}
   a2: {fileID: 1180749570}
-  strength: 100
+  strength: 150
   name: Tigh1
   Kp: 0.5
   Kd: 0.1
@@ -445,7 +445,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153625368}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -570,7 +570,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153625368}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 296.517, y: 113.49, z: -0.222}
+  m_LocalPosition: {x: 296.577, y: 113.49, z: -0.222}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 1088601588}
@@ -722,7 +722,7 @@ MonoBehaviour:
   rb2: {fileID: 153625369}
   a1: {fileID: 538394511}
   a2: {fileID: 1810142732}
-  strength: 100
+  strength: 150
   name: FrontTigh2
   Kp: 0.5
   Kd: 0.1
@@ -918,7 +918,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209034369}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -997,7 +997,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209034369}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 296.477, y: 112.87, z: 0.006}
+  m_LocalPosition: {x: 296.516, y: 112.87, z: 0.006}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 1696043536}
@@ -1615,7 +1615,7 @@ MonoBehaviour:
   rb2: {fileID: 209034370}
   a1: {fileID: 1151959186}
   a2: {fileID: 1381143863}
-  strength: 100
+  strength: 200
   name: Knee1
   Kp: 0.5
   Kd: 0.1
@@ -1667,7 +1667,7 @@ MonoBehaviour:
   rb2: {fileID: 900065743}
   a1: {fileID: 1065035938}
   a2: {fileID: 838339219}
-  strength: 100
+  strength: 200
   name: Knee2
   Kp: 0.5
   Kd: 0.1
@@ -2326,7 +2326,7 @@ MonoBehaviour:
   rb2: {fileID: 900065743}
   a1: {fileID: 1206947908}
   a2: {fileID: 1599746893}
-  strength: 100
+  strength: 170
   name: Ankle2
   Kp: 0.5
   Kd: 0.1
@@ -2803,7 +2803,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900065742}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2882,7 +2882,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900065742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 296.515, y: 112.89, z: -0.219}
+  m_LocalPosition: {x: 296.598, y: 112.89, z: -0.219}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 1599746893}
@@ -3034,7 +3034,7 @@ MonoBehaviour:
   rb2: {fileID: 209034370}
   a1: {fileID: 1818640809}
   a2: {fileID: 1696043536}
-  strength: 100
+  strength: 170
   name: Ankle1
   Kp: 0.5
   Kd: 0.1
@@ -3147,7 +3147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.1747577, y: 0.64911, z: -0.20138903, w: 0.7124313}
-  m_LocalPosition: {x: 21.74, y: 1.44, z: -31.81}
+  m_LocalPosition: {x: 22.92, y: 3.41, z: -31.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3166,7 +3166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 577509637688717600, guid: e10305a691d19674092eadfe14801a20, type: 3}
-  force: 10
+  force: 50
 --- !u!1 &983689869
 GameObject:
   m_ObjectHideFlags: 0
@@ -3562,10 +3562,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082200287}
   serializedVersion: 2
-  m_Mass: 50
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -4160,7 +4160,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229251273}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -4285,7 +4285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229251273}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 296.478, y: 113.46, z: -0.002}
+  m_LocalPosition: {x: 296.512, y: 113.46, z: -0.002}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 1180749570}
@@ -5405,7 +5405,7 @@ MonoBehaviour:
   rb2: {fileID: 153625369}
   a1: {fileID: 202561174}
   a2: {fileID: 1088601588}
-  strength: 100
+  strength: 150
   name: Tigh2
   Kp: 0.5
   Kd: 0.1
@@ -6060,7 +6060,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856756722}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -6138,7 +6138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856756722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.976, y: 5.06, z: -31.855}
+  m_LocalPosition: {x: 27.47, y: 1.21, z: -31.855}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6748,6 +6748,8 @@ MonoBehaviour:
   forcePos: {fileID: 218174754}
   forcePos2: {fileID: 1660233952}
   animationHead: 0
+  footPos1: {fileID: 218174754}
+  footPos2: {fileID: 1660233952}
 --- !u!4 &1909042310
 Transform:
   m_ObjectHideFlags: 0
@@ -6877,7 +6879,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980362736}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948b89c3fb5298343b9ff9dec9282d5d, type: 3}
   m_Name: 
@@ -6886,7 +6888,7 @@ MonoBehaviour:
   rb2: {fileID: 1229251274}
   a1: {fileID: 1536917948}
   a2: {fileID: 1818089345}
-  strength: 100
+  strength: 150
   name: FrontTigh1
   Kp: 0.5
   Kd: 0.1
