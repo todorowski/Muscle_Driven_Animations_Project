@@ -9,10 +9,11 @@ public class MuscleAnimationController : MonoBehaviour
     public MuscleAnimation animationObject;
     public Transform ragdoll;
     //public GameObject showCoM;
-    public Transform[] footEdges;
+    public Transform[] rightEdges;
+    public Transform[] leftEdges;
     public Transform origin;
 
-    public Transform forcePos;
+    public Transform forcePos1;
     public Transform forcePos2;
 
     //Start of the animation timeline
@@ -26,18 +27,18 @@ public class MuscleAnimationController : MonoBehaviour
     public Transform footPos1;
     public Transform footPos2;
 
+    public GameObject endEffector_r;
+    public GameObject endEffector_l;
+
     GameObject test; 
     Rigidbody tb;
     
     void Start()
     {
-        Debug.Log(footEdges[0].transform.position);
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
         test = GameObject.Find("Body");
         tb = test.GetComponent<Rigidbody>();
-
-        
     }
 
     void LateUpdate()
@@ -48,13 +49,7 @@ public class MuscleAnimationController : MonoBehaviour
     void Update()
     {
         //tb.AddForceAtPosition(Vector3.up * (150f), origin.transform.position);
-        CalculateCenterOfMass();
-        Test2();
-
-        CheckIfCoMIsBalanced();
-
-        Vector3 CoMVector = CoM - footPos1.position;
-        Debug.DrawLine(CoM, footPos1.position - CoM, Color.red);
+        
     }
 
     void FixedUpdate()
@@ -73,7 +68,14 @@ public class MuscleAnimationController : MonoBehaviour
         }
         animationHead += Time.fixedDeltaTime;
 
-     
+        CalculateCenterOfMass();
+
+        if (CheckIfCoMIsBalanced() == false)
+        {
+            Rebalance(footPos1, footPos2, CoM);
+        }
+
+
     }
 
     //Check if CoM is balanced
@@ -94,91 +96,91 @@ public class MuscleAnimationController : MonoBehaviour
         return CoM;
     }
 
-    void CheckIfCoMIsBalanced()
+    bool CheckIfCoMIsBalanced()
     {
         RaycastHit hit;
+        bool balanced;
         if(Physics.Raycast(CoM, -origin.up, out hit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
         {
             Debug.Log("balanced");
+            balanced = true;
         }
         else
         {
             Debug.Log("Not balanced");
+            balanced = false;
         }
         Debug.DrawRay(CoM, -origin.up, Color.cyan);
+        return balanced;
+        
     }
 
-    void Test()
+    //Get the point which the CoM is the closest to 
+    Vector3 GetDirectionToMove(Transform[] edges)
     {
-        if (Input.GetKey(KeyCode.E))
+        Vector3 dirToMove = new Vector3(0,0,0);
+        if((edges[0].position - CoM).magnitude < (edges[1].position - CoM).magnitude)
         {
-            foreach (MuscleAnimationStruct mStruct in animationObject.muscles)
-            {
-                foreach (MuscleWithAnim m in ragdollMuscles)
-                {
-                    if (m.name == "Ankle1")
-                    {
-                        Debug.Log("HEEEEEEEEJ");
-                        m.targetLength = 100f;
-                        m.Activate();
-                    }
-                }
-            }
-        }
-    }
-
-    void Test2()
-    {
-        GameObject g = GameObject.Find("LowerLeg1");
-        Rigidbody rb = g.GetComponent<Rigidbody>();
-        if (Input.GetKey(KeyCode.E))
-        {
-            rb.AddForceAtPosition(-transform.right * 10f, forcePos.position);
-        }
-
-        GameObject g2 = GameObject.Find("LowerLeg2");
-        Rigidbody rb2 = g2.GetComponent<Rigidbody>();
-        if (Input.GetKey(KeyCode.R))
-        {
-            rb2.AddForceAtPosition(-transform.right * 10f, forcePos2.position);
-        }
-    }
-
-    void rebalance(Transform pos1, Transform pos2, Transform CoM)
-    {
-        Vector3 newPos = new Vector3(0,0,0);
-
-        if(pos1.position.magnitude - CoM.position.magnitude > pos2.position.magnitude - CoM.position.magnitude)
-        {
-            
-        }
-
-  
-
-        Vector3 targetPosition = new Vector3();
-        GameObject g = GameObject.Find("LowerLeg1");
-        Rigidbody rb = g.GetComponent<Rigidbody>();
-
-        GameObject g2 = GameObject.Find("LowerLeg2");
-        Rigidbody rb2 = g2.GetComponent<Rigidbody>();
-
-        if(rb.transform.position != footPos1.position)
-        {
-            rb.AddForceAtPosition(-(rb.transform.position - footPos1.position) * 30f, forcePos.position);
+            dirToMove = edges[1].position - edges[0].position;
         }
         else
         {
-            Debug.Log("At pos");
+            dirToMove = edges[0].position - edges[1].position;
         }
 
-        if (rb2.transform.position != footPos2.position)
+        return dirToMove;
+    }
+
+    void Rebalance(Transform pos1, Transform pos2, Vector3 CoM)
+    {
+
+        //Check which foot is furthest from CoM
+        GameObject g;
+        Transform[] edges;
+        Transform forcepos;
+
+        if ((CoM - endEffector_r.transform.position).magnitude < (CoM - endEffector_l.transform.position).magnitude)
         {
-            rb2.AddForceAtPosition(-(rb2.transform.position - footPos2.position) * 30f, forcePos2.position);
+            g = endEffector_l;
+            edges = leftEdges;
+            forcepos = forcePos1;
         }
         else
         {
-            Debug.Log("At pos");
+            g = endEffector_r;
+            edges = rightEdges;
+            forcepos = forcePos2;
         }
+
+        Vector3 dirToMove = GetDirectionToMove(edges);
+        Debug.DrawLine(g.transform.position, dirToMove, Color.blue);
+        Rigidbody rb = g.GetComponent<Rigidbody>();
+        rb.AddForceAtPosition(dirToMove * 67.5f, forcepos.position, ForceMode.Impulse);
+
+        /*GameObject g;
+        Transform[] edges;
+        Transform forcepos;
+        if (CoM.magnitude - pos1.position.magnitude < CoM.magnitude - pos2.position.magnitude)
+        {
+            g = GameObject.Find("LowerLeg1");
+            edges = leftEdges;
+            forcepos = forcePos1;
+        }
+        else
+        {
+            g = GameObject.Find("LowerLeg2");
+            edges = rightEdges;
+            forcepos = forcePos2;
+        }
+
+        Rigidbody rb = g.GetComponent<Rigidbody>();
+        Vector3 dirToMove = GetDirectionToMove(edges);
+        Debug.Log("EDGES: " + edges[0] + " " + edges[1]);
+
+        rb.AddForceAtPosition(dirToMove - forcepos.position * 2.7f, forcepos.position);
+        Debug.DrawLine(forcepos.position, dirToMove - forcepos.position, Color.blue);
+        Debug.Log("FORCEPOS: " + forcepos.position);*/
+
     }
 }
 
