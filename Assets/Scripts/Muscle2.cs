@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//AUTHOR: Phylliida
+//FROM https://github.com/Phylliida/openmuscle/blob/master/OpenMuscle.cs
+
 public class Muscle2
 {
     ContractileElement CE;

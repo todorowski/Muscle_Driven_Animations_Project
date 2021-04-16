@@ -7,29 +7,30 @@ using System.Linq;
 public class MuscleAnimationController : MonoBehaviour
 {
     public MuscleAnimation animationObject;
-    public Transform ragdoll;
-    //public GameObject showCoM;
+    public GameObject endEffector_r;
+    public GameObject endEffector_l;
+
     public Transform[] rightEdges;
     public Transform[] leftEdges;
     public Transform origin;
 
+    public Transform ragdoll;
     public Transform forcePos1;
     public Transform forcePos2;
+    public Transform footPos1;
+    public Transform footPos2;
 
     //Start of the animation timeline
     public float animationHead = 0.0f;
 
+    //Initial center of mass
     Vector3 CoM = Vector3.zero;
+
     List<MuscleWithAnim> ragdollMuscles = new List<MuscleWithAnim>();
     List<Rigidbody> rigidbodyList;
     bool isBalanced;
 
-    public Transform footPos1;
-    public Transform footPos2;
-
-    public GameObject endEffector_r;
-    public GameObject endEffector_l;
-
+    //For tests
     GameObject test; 
     Rigidbody tb;
     
@@ -41,15 +42,9 @@ public class MuscleAnimationController : MonoBehaviour
         tb = test.GetComponent<Rigidbody>();
     }
 
-    void LateUpdate()
-    {
-        
-    }
-
     void Update()
     {
         //tb.AddForceAtPosition(Vector3.up * (150f), origin.transform.position);
-        
     }
 
     void FixedUpdate()
@@ -77,10 +72,6 @@ public class MuscleAnimationController : MonoBehaviour
 
 
     }
-
-    //Check if CoM is balanced
-    //TODO: Change to SAT to support all shapes
-    //Or raycast on collider
 
     Vector3 CalculateCenterOfMass()
     {
@@ -133,12 +124,11 @@ public class MuscleAnimationController : MonoBehaviour
 
     void Rebalance(Transform pos1, Transform pos2, Vector3 CoM)
     {
-
-        //Check which foot is furthest from CoM
         GameObject g;
         Transform[] edges;
         Transform forcepos;
 
+        //Check which foot is furthest from CoM
         if ((CoM - endEffector_r.transform.position).magnitude < (CoM - endEffector_l.transform.position).magnitude)
         {
             g = endEffector_l;
@@ -153,7 +143,7 @@ public class MuscleAnimationController : MonoBehaviour
         }
 
         Vector3 dirToMove = GetDirectionToMove(edges);
-        Debug.DrawLine(g.transform.position, dirToMove, Color.blue);
+        Debug.DrawRay(g.transform.position, dirToMove * 10f, Color.blue);
         Rigidbody rb = g.GetComponent<Rigidbody>();
         rb.AddForceAtPosition(dirToMove * 67.5f, forcepos.position, ForceMode.Impulse);
 
