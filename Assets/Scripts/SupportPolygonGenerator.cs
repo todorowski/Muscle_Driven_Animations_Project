@@ -21,6 +21,12 @@ public class SupportPolygonGenerator : MonoBehaviour
         GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
+    public void GenerateNewPolygon()
+    {
+        CreateShape();
+        UpdateMesh();
+    }
+
     void CreateShape()
     {
         vertices = new Vector3[verticePositions.Length];

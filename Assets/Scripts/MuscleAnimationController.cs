@@ -9,6 +9,7 @@ public class MuscleAnimationController : MonoBehaviour
     public MuscleAnimation animationObject;
     public GameObject endEffector_r;
     public GameObject endEffector_l;
+    public GameObject supportPolyGen;
 
     public Transform[] rightEdges;
     public Transform[] leftEdges;
@@ -19,6 +20,7 @@ public class MuscleAnimationController : MonoBehaviour
     public Transform forcePos2;
     public Transform footPos1;
     public Transform footPos2;
+    public float forceMultiplier;
 
     //Start of the animation timeline
     public float animationHead = 0.0f;
@@ -28,7 +30,7 @@ public class MuscleAnimationController : MonoBehaviour
 
     List<MuscleWithAnim> ragdollMuscles = new List<MuscleWithAnim>();
     List<Rigidbody> rigidbodyList;
-    bool isBalanced;
+    bool r_grounded, l_grounded;
 
     //For tests
     GameObject test; 
@@ -45,6 +47,7 @@ public class MuscleAnimationController : MonoBehaviour
     void Update()
     {
         //tb.AddForceAtPosition(Vector3.up * (150f), origin.transform.position);
+        CheckIfGrounded();
     }
 
     void FixedUpdate()
@@ -68,6 +71,11 @@ public class MuscleAnimationController : MonoBehaviour
         if (CheckIfCoMIsBalanced() == false)
         {
             Rebalance(footPos1, footPos2, CoM);
+        }
+
+        if(CheckIfGrounded())
+        {
+            supportPolyGen.GetComponent<SupportPolygonGenerator>().GenerateNewPolygon();
         }
 
 
@@ -110,6 +118,7 @@ public class MuscleAnimationController : MonoBehaviour
     Vector3 GetDirectionToMove(Transform[] edges)
     {
         Vector3 dirToMove = new Vector3(0,0,0);
+        //consider positive and negative results
         if((edges[0].position - CoM).magnitude < (edges[1].position - CoM).magnitude)
         {
             dirToMove = edges[1].position - edges[0].position;
@@ -134,19 +143,34 @@ public class MuscleAnimationController : MonoBehaviour
             g = endEffector_l;
             edges = leftEdges;
             forcepos = forcePos1;
+            Debug.Log("left edges");
         }
         else
         {
             g = endEffector_r;
             edges = rightEdges;
             forcepos = forcePos2;
+            Debug.Log("right edges");
         }
 
         Vector3 dirToMove = GetDirectionToMove(edges);
         Debug.DrawRay(g.transform.position, dirToMove * 10f, Color.blue);
         Rigidbody rb = g.GetComponent<Rigidbody>();
-        rb.AddForceAtPosition(dirToMove * 67.5f, forcepos.position, ForceMode.Impulse);
+        rb.AddForceAtPosition(dirToMove * forceMultiplier, forcepos.position, ForceMode.Impulse);
 
+        //supportPolyGen.GetComponent<SupportPolygonGenerator>().GenerateNewPolygon();
+        //Generate new support polygon here?
+        //public method in support polygon generator for generating polygons when the ragdoll is balanced
+    }
+
+    bool CheckIfGrounded()
+    {
+        //Debug.DrawRay(g.transform.position, dirToMove * 10f, Color.blue);
+        float raycastDistance = 0.15f;
+        RaycastHit hit;
+        return (Physics.Raycast(forcePos1.position, -forcePos1.up * raycastDistance, out hit, raycastDistance, LayerMask.GetMask("Default")) && 
+                Physics.Raycast(forcePos2.position, -forcePos2.up, out hit, raycastDistance, LayerMask.GetMask("Default")));
+        
     }
 }
 
