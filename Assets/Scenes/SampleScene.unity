@@ -3562,7 +3562,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082200287}
   serializedVersion: 2
-  m_Mass: 60
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -6738,7 +6738,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationObject: {fileID: 11400000, guid: 71b2bfe79f4aeb343b7c816abfc6989a, type: 2}
-  ragdoll: {fileID: 1909042310}
+  endEffector_r: {fileID: 900065742}
+  endEffector_l: {fileID: 209034369}
   rightEdges:
   - {fileID: 1472380577}
   - {fileID: 815375515}
@@ -6746,13 +6747,12 @@ MonoBehaviour:
   - {fileID: 1860524402}
   - {fileID: 1419112999}
   origin: {fileID: 1082200296}
+  ragdoll: {fileID: 1909042310}
   forcePos1: {fileID: 218174754}
   forcePos2: {fileID: 1660233952}
-  animationHead: 0
   footPos1: {fileID: 218174754}
   footPos2: {fileID: 1660233952}
-  endEffector_r: {fileID: 900065742}
-  endEffector_l: {fileID: 209034369}
+  animationHead: 0
 --- !u!4 &1909042310
 Transform:
   m_ObjectHideFlags: 0
