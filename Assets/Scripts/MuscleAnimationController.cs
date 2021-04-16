@@ -147,30 +147,6 @@ public class MuscleAnimationController : MonoBehaviour
         Rigidbody rb = g.GetComponent<Rigidbody>();
         rb.AddForceAtPosition(dirToMove * 67.5f, forcepos.position, ForceMode.Impulse);
 
-        /*GameObject g;
-        Transform[] edges;
-        Transform forcepos;
-        if (CoM.magnitude - pos1.position.magnitude < CoM.magnitude - pos2.position.magnitude)
-        {
-            g = GameObject.Find("LowerLeg1");
-            edges = leftEdges;
-            forcepos = forcePos1;
-        }
-        else
-        {
-            g = GameObject.Find("LowerLeg2");
-            edges = rightEdges;
-            forcepos = forcePos2;
-        }
-
-        Rigidbody rb = g.GetComponent<Rigidbody>();
-        Vector3 dirToMove = GetDirectionToMove(edges);
-        Debug.Log("EDGES: " + edges[0] + " " + edges[1]);
-
-        rb.AddForceAtPosition(dirToMove - forcepos.position * 2.7f, forcepos.position);
-        Debug.DrawLine(forcepos.position, dirToMove - forcepos.position, Color.blue);
-        Debug.Log("FORCEPOS: " + forcepos.position);*/
-
     }
 }
 
