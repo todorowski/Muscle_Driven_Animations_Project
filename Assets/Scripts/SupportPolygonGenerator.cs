@@ -9,6 +9,7 @@ public class SupportPolygonGenerator : MonoBehaviour
     Vector3[] vertices;
     int[] triangles;
     Mesh mesh;
+    MeshCollider col;
 
     void Start()
     {
@@ -18,13 +19,18 @@ public class SupportPolygonGenerator : MonoBehaviour
         CreateShape();
         UpdateMesh();
 
-        GetComponent<MeshCollider>().sharedMesh = mesh;
+        //GetComponent<MeshCollider>().sharedMesh = mesh;
+        col = GetComponent<MeshCollider>();
+        col.sharedMesh = mesh;
     }
 
     public void GenerateNewPolygon()
     {
         CreateShape();
         UpdateMesh();
+        col.sharedMesh = mesh;
+        //update collider
+        //recalcxulate normals
     }
 
     void CreateShape()
