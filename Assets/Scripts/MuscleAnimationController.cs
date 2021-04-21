@@ -7,19 +7,19 @@ using System.Linq;
 public class MuscleAnimationController : MonoBehaviour
 {
     public MuscleAnimation animationObject;
-    public GameObject endEffector_r;
-    public GameObject endEffector_l;
-    public GameObject supportPolyGen;
+    //public GameObject endEffector_r;
+    //public GameObject endEffector_l;
+    //public GameObject supportPolyGen;
 
-    public Transform[] rightEdges;
-    public Transform[] leftEdges;
+    //public Transform[] rightEdges;
+    //public Transform[] leftEdges;
 
     public Transform ragdoll;
-    public Transform forcePos1;
-    public Transform forcePos2;
-    public Transform footPos1;
-    public Transform footPos2;
-    public float forceMultiplier;
+    //public Transform forcePos1;
+    //public Transform forcePos2;
+    //public Transform footPos1;
+    //public Transform footPos2;
+    //public float forceMultiplier;
     public float compensationMultiplier;
 
     public Transform pos;
@@ -57,7 +57,7 @@ public class MuscleAnimationController : MonoBehaviour
     private void Update()
     {
         CalculateCenterOfMass();
-        AddGravityCompensation();
+        //AddGravityCompensation();
     }
 
     /*void CheckStartConditions()
