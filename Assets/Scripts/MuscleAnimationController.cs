@@ -39,7 +39,7 @@ public class MuscleAnimationController : MonoBehaviour
 
     //For tests
     GameObject test; 
-    Rigidbody tb;
+    public Rigidbody addForce;
 
     bool balancingLeft;
     bool balancingRight;
@@ -48,8 +48,6 @@ public class MuscleAnimationController : MonoBehaviour
     {
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
-        test = GameObject.Find("Body");
-        tb = test.GetComponent<Rigidbody>();
 
         //CheckStartConditions();
     }
@@ -57,7 +55,7 @@ public class MuscleAnimationController : MonoBehaviour
     private void Update()
     {
         CalculateCenterOfMass();
-        //AddGravityCompensation();
+        AddGravityCompensation();
     }
 
     /*void CheckStartConditions()
@@ -124,6 +122,8 @@ public class MuscleAnimationController : MonoBehaviour
         }*/
     }
 
+    //---------------------BALANCE---------------------//
+
     Vector3 CalculateCenterOfMass()
     {
         CoM = Vector3.zero;
@@ -144,8 +144,10 @@ public class MuscleAnimationController : MonoBehaviour
     {
         Vector3 forcePos = CalculateCenterOfMass();
         
-        tb.AddForceAtPosition(Vector3.up * compensationMultiplier, pos.position);
+        //adding force at wrong object
+        addForce.AddForceAtPosition(Vector3.up * compensationMultiplier, pos.position);
         Debug.DrawRay(forcePos, Vector3.up * compensationMultiplier, Color.cyan);
+        Debug.Log("compensating??");
 
     }
 
