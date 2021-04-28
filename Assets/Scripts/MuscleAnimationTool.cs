@@ -26,8 +26,8 @@ public class MuscleAnimationTool : MonoBehaviour
         Rigidbody[] bodies = ragdollParent.GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody body in bodies)
         {
-            //body.drag = float.MaxValue;
-            //body.angularDrag = float.MaxValue;
+            body.drag = float.MaxValue;
+            body.angularDrag = float.MaxValue;
         }
 
         //Initialize animation data
@@ -42,7 +42,7 @@ public class MuscleAnimationTool : MonoBehaviour
         keyFrameButton.onClick.AddListener(createKeyframe);
     }
 
-    void Update()
+    /*void Update()
     {
         //only for a short time
         //until given input
@@ -50,7 +50,7 @@ public class MuscleAnimationTool : MonoBehaviour
         {
             createKeyframeEachFrame();
         }
-    }
+    }*/
 
     //Saves the lengths for every muscle in user created animation pose
     void createKeyframe()

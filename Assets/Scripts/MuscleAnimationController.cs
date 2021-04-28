@@ -9,10 +9,10 @@ public class MuscleAnimationController : MonoBehaviour
     public MuscleAnimation animationObject;
     //public GameObject endEffector_r;
     //public GameObject endEffector_l;
-    //public GameObject supportPolyGen;
+    public GameObject supportPolyGen;
 
-    //public Transform[] rightEdges;
-    //public Transform[] leftEdges;
+    public Transform[] rightEdges;
+    public Transform[] leftEdges;
 
     public Transform ragdoll;
     //public Transform forcePos1;
@@ -21,8 +21,12 @@ public class MuscleAnimationController : MonoBehaviour
     //public Transform footPos2;
     //public float forceMultiplier;
     public float compensationMultiplier;
+    public float footSupportForce;
 
     public Transform pos;
+    public Transform[] footSupportPositions;
+    public Rigidbody leftFoot;
+    public Rigidbody rightFoot;
 
     //Start of the animation timeline
     public float animationHead = 0.0f;
@@ -43,49 +47,28 @@ public class MuscleAnimationController : MonoBehaviour
 
     bool balancingLeft;
     bool balancingRight;
+
+    SupportPolygonGenerator supportPolyGenObj;
     
     void Start()
     {
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
 
-        //CheckStartConditions();
+        supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
+        supportPolyGenObj.GenerateNewPolygon();
     }
 
     private void Update()
     {
         CalculateCenterOfMass();
         AddGravityCompensation();
+        supportPolyGenObj.GenerateNewPolygon();
+
     }
-
-    /*void CheckStartConditions()
-    {
-        //3 raycasts
-        //the DISTANCE between them not the positions in the world/on the polygon
-        //the distance between the impact points in world space
-        CoM = CalculateCenterOfMass();
-        Vector3 CoMStartingPos;
-        RaycastHit CoMHit;
-        Debug.Log(CoM);
-        if (Physics.Raycast(CoM, Vector3.down, out CoMHit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
-        {
-            if(CoMHit.collider != null)
-            {
-                CoMStartingPos = CoMHit.point;
-                Debug.Log("CoM position: " + CoMStartingPos);
-                Debug.DrawRay(CoM, Vector3.down, Color.magenta);
-
-                leftFootTargetDist = (forcePos1.position - CoM).magnitude;
-                rightFootTargetDist = (forcePos1.position - CoM).magnitude;
-                Debug.Log("left foot distance to CoM: " + leftFootTargetDist);
-                Debug.Log("right foot distance to CoM: " + rightFootTargetDist);
-            }
-        }
-    }*/
 
     void FixedUpdate()
     {
-        //CalculateCenterOfMass();
         //Set target length according to anim curve and activate muscles
         foreach (MuscleAnimationStruct mStruct in animationObject.muscles)
         {
@@ -99,27 +82,6 @@ public class MuscleAnimationController : MonoBehaviour
             }
         }
         animationHead += Time.fixedDeltaTime;
-
-        
-
-        /*if (CheckIfCoMIsBalanced() == false)
-        {
-            if((footPos1.position - CoM).magnitude > (footPos2.position - CoM).magnitude && balancingRight == false)
-            {
-                //rebalance left foot
-                balancingLeft = true;
-                RebalanceFoot(footPos1, endEffector_l, leftEdges, forcePos1, leftFootTargetDist);
-                balancingLeft = false;
-            }
-            else if((footPos2.position - CoM).magnitude > (footPos1.position - CoM).magnitude && balancingLeft == false)
-            {
-                balancingRight = true;
-                //rebalance right foot
-                RebalanceFoot(footPos2, endEffector_r, rightEdges, forcePos2, rightFootTargetDist);
-                balancingRight = false;
-            }
-            
-        }*/
     }
 
     //---------------------BALANCE---------------------//
@@ -144,10 +106,12 @@ public class MuscleAnimationController : MonoBehaviour
     {
         Vector3 forcePos = CalculateCenterOfMass();
         
-        //adding force at wrong object
         addForce.AddForceAtPosition(Vector3.up * compensationMultiplier, pos.position);
         Debug.DrawRay(forcePos, Vector3.up * compensationMultiplier, Color.cyan);
-        Debug.Log("compensating??");
+
+        //add force for keeping feet grounded
+        leftFoot.AddForceAtPosition(Vector3.down * footSupportForce, footSupportPositions[0].position);
+        rightFoot.AddForceAtPosition(Vector3.down * footSupportForce, footSupportPositions[1].position);
 
     }
 

@@ -19,7 +19,6 @@ public class SupportPolygonGenerator : MonoBehaviour
         CreateShape();
         UpdateMesh();
 
-        //GetComponent<MeshCollider>().sharedMesh = mesh;
         col = GetComponent<MeshCollider>();
         col.sharedMesh = mesh;
     }
@@ -38,7 +37,7 @@ public class SupportPolygonGenerator : MonoBehaviour
         vertices = new Vector3[verticePositions.Length];
         for (int i = 0; i < verticePositions.Length; i++)
         {
-            vertices[i] = verticePositions[i].position;
+            vertices[i] = verticePositions[i].localPosition;
         }
 
         triangles = new int[]
