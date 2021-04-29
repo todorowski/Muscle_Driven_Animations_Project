@@ -41,12 +41,13 @@ public class MuscleAnimationController : MonoBehaviour
     List<Rigidbody> rigidbodyList;
     bool r_grounded, l_grounded;
 
-    //For tests
-    GameObject test; 
     public Rigidbody addForce;
 
     bool balancingLeft;
     bool balancingRight;
+
+    //test
+    public GameObject test;
 
     SupportPolygonGenerator supportPolyGenObj;
     
@@ -54,9 +55,14 @@ public class MuscleAnimationController : MonoBehaviour
     {
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
+        CalculateCenterOfMass();
 
         supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
         supportPolyGenObj.GenerateNewPolygon();
+
+        Vector3 centerPos = GetHitPos();
+        GameObject testObj = Instantiate(test, centerPos, transform.rotation);
+        Debug.Log(centerPos);
     }
 
     private void Update()
@@ -64,6 +70,8 @@ public class MuscleAnimationController : MonoBehaviour
         CalculateCenterOfMass();
         AddGravityCompensation();
         supportPolyGenObj.GenerateNewPolygon();
+
+        CheckIfCoMIsBalanced();
 
     }
 
@@ -86,7 +94,7 @@ public class MuscleAnimationController : MonoBehaviour
 
     //---------------------BALANCE---------------------//
 
-    Vector3 CalculateCenterOfMass()
+    public Vector3 CalculateCenterOfMass()
     {
         CoM = Vector3.zero;
         float c = 0f;
@@ -115,7 +123,7 @@ public class MuscleAnimationController : MonoBehaviour
 
     }
 
-    /*bool CheckIfCoMIsBalanced()
+    bool CheckIfCoMIsBalanced()
     {
         RaycastHit hit;
         bool balanced;
@@ -127,10 +135,26 @@ public class MuscleAnimationController : MonoBehaviour
         {
             balanced = false;
         }
-        
-        return balanced;
-        
-    }*/
+        return balanced;   
+    }
+
+    Vector3 GetHitPos()
+    {
+        RaycastHit hit;
+        Vector3 position;
+        if (Physics.Raycast(CoM, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
+        {
+            position = hit.point;
+            Debug.Log("THE HIT: " + hit.point);
+            return position;
+        }
+        else
+        {
+            position = Vector3.zero;
+        }
+
+        return position;
+    }
 
     //Get the point which the CoM is the closest to 
     /*Vector3 GetDirectionToMove(Transform[] edges)
