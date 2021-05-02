@@ -50,6 +50,10 @@ public class MuscleAnimationController : MonoBehaviour
     public GameObject test;
 
     SupportPolygonGenerator supportPolyGenObj;
+
+    Vector3 CoMStartPos;
+
+    public Rigidbody hips;
     
     void Start()
     {
@@ -60,9 +64,9 @@ public class MuscleAnimationController : MonoBehaviour
         supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
         supportPolyGenObj.GenerateNewPolygon();
 
-        Vector3 centerPos = GetHitPos();
-        GameObject testObj = Instantiate(test, centerPos, transform.rotation);
-        Debug.Log(centerPos);
+        CoMStartPos = GetHitPos();
+        GameObject testObj = Instantiate(test, CoMStartPos, transform.rotation);
+        Debug.Log(CoMStartPos);
     }
 
     private void Update()
@@ -120,15 +124,33 @@ public class MuscleAnimationController : MonoBehaviour
         //add force for keeping feet grounded
         leftFoot.AddForceAtPosition(Vector3.down * footSupportForce, footSupportPositions[0].position);
         rightFoot.AddForceAtPosition(Vector3.down * footSupportForce, footSupportPositions[1].position);
-
     }
 
     bool CheckIfCoMIsBalanced()
     {
         RaycastHit hit;
         bool balanced;
+        
         if(Physics.Raycast(CoM, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
         {
+            //called in update so this value will change, save value from start
+            Vector3 hitPointInCol = hit.point;
+            Debug.Log("hit in collider: " + hit.point);
+
+            //Get the direction CoM is moving in from start pos
+            Vector3 CoMMovementDir = hitPointInCol - CoMStartPos;
+            Debug.Log("COM movement: " + CoMMovementDir);
+
+            //how to make this value signed?
+            float CoMMovementDirMag = Mathf.Abs(CoMMovementDir.magnitude);
+            if(CoMMovementDirMag > 0.01f)
+            {
+                Vector3 compensationMovement = -(CoMMovementDir);
+                Vector3 compForce = new Vector3(compensationMovement.x, 0.0f, compensationMovement.z);
+                hips.AddForce(compForce * 40f, ForceMode.Impulse);
+                Debug.DrawRay(CoM, CoMMovementDir * 10f, Color.magenta);
+                Debug.DrawRay(CoM, compForce * 10f, Color.blue);
+            }
             balanced = true;
         }
         else
@@ -155,87 +177,5 @@ public class MuscleAnimationController : MonoBehaviour
 
         return position;
     }
-
-    //Get the point which the CoM is the closest to 
-    /*Vector3 GetDirectionToMove(Transform[] edges)
-    {
-        Vector3 dirToMove = new Vector3(0,0,0);
-        //consider positive and negative results
-        if((edges[0].position - CoM).magnitude < (edges[1].position - CoM).magnitude)
-        {
-            dirToMove = edges[1].position - edges[0].position;
-        }
-        else
-        {
-            dirToMove = edges[0].position - edges[1].position;
-        }
-
-        return dirToMove;
-    }*/
-
-    /*void Rebalance(Transform pos1, Transform pos2, Vector3 CoM)
-    {
-        GameObject g;
-        Transform[] edges;
-        Transform forcepos;
-        float targetDist = 0.0f;
-
-        //Check which foot is furthest from CoM
-        if ((CoM - endEffector_r.transform.position).magnitude < (CoM - endEffector_l.transform.position).magnitude)
-        {
-            g = endEffector_l;
-            edges = leftEdges;
-            forcepos = forcePos1;
-            targetDist = leftFootTargetDist;
-            Debug.Log("left foot target dist: " + leftFootTargetDist);
-        }
-        else
-        {
-            g = endEffector_r;
-            edges = rightEdges;
-            forcepos = forcePos2;
-            targetDist = rightFootTargetDist;
-            Debug.Log("Right foot target dist: " + rightFootTargetDist);
-        }
-
-        Vector3 dirToMove = GetDirectionToMove(edges);
-        Debug.DrawRay(g.transform.position, dirToMove.normalized * forceMultiplier, Color.blue);
-        Rigidbody rb = g.GetComponent<Rigidbody>();
-        if((forcepos.position - CoM).magnitude != targetDist)
-        {
-            Debug.Log("adding force");
-            rb.AddForceAtPosition(dirToMove.normalized * forceMultiplier, forcepos.position, ForceMode.Impulse);
-        }
-
-        //supportPolyGen.GetComponent<SupportPolygonGenerator>().GenerateNewPolygon();
-        //Generate new support polygon here?
-        //public method in support polygon generator for generating polygons when the ragdoll is balanced
-    }*/
-
-    /*void RebalanceFoot(Transform foot, GameObject g, Transform[] edges, Transform forcepos, float targetDistance)
-    {
-        Vector3 dirToMove = GetDirectionToMove(edges);
-        Debug.DrawRay(g.transform.position, dirToMove.normalized * forceMultiplier, Color.blue);
-        Rigidbody rb = g.GetComponent<Rigidbody>();
-        if ((forcepos.position - CoM).magnitude != targetDistance)
-        {
-            Debug.Log("adding force");
-            rb.AddForceAtPosition(dirToMove.normalized * forceMultiplier, forcepos.position, ForceMode.Impulse);
-        }
-        else
-        {
-            Debug.Log("EIIII");
-            if(foot == footPos1)
-            {
-                balancingLeft = false;
-            }
-            else
-            {
-                balancingRight = false;
-            }
-        }
-        
-        
-    }*/
 }
 

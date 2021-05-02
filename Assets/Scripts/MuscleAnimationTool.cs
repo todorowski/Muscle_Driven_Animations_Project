@@ -26,8 +26,8 @@ public class MuscleAnimationTool : MonoBehaviour
         Rigidbody[] bodies = ragdollParent.GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody body in bodies)
         {
-            body.drag = float.MaxValue;
-            body.angularDrag = float.MaxValue;
+            //body.drag = float.MaxValue;
+            //body.angularDrag = float.MaxValue;
         }
 
         //Initialize animation data
@@ -60,6 +60,7 @@ public class MuscleAnimationTool : MonoBehaviour
             float length = (m.a1.transform.position - m.a2.transform.position).magnitude;
             animationObject.muscles[muscleIndexDictonary[m]].addKeyframe(animationHead, length);
         }
+        animationHead += 2;
     }
 
     //Saves the length for very muscle in complete aniamtion clip
