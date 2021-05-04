@@ -23,10 +23,10 @@ public class MuscleAnimationController : MonoBehaviour
     public float compensationMultiplier;
     public float footSupportForce;
 
-    public Transform pos;
-    public Transform[] footSupportPositions;
-    public Rigidbody leftFoot;
-    public Rigidbody rightFoot;
+    //public Transform pos;
+    //public Transform[] footSupportPositions;
+    //public Rigidbody leftFoot;
+    //public Rigidbody rightFoot;
 
     //Start of the animation timeline
     public float animationHead = 0.0f;
@@ -41,7 +41,7 @@ public class MuscleAnimationController : MonoBehaviour
     List<Rigidbody> rigidbodyList;
     bool r_grounded, l_grounded;
 
-    public Rigidbody addForce;
+    //public Rigidbody addForce;
 
     bool balancingLeft;
     bool balancingRight;
@@ -49,33 +49,33 @@ public class MuscleAnimationController : MonoBehaviour
     //test
     public GameObject test;
 
-    SupportPolygonGenerator supportPolyGenObj;
+    //SupportPolygonGenerator supportPolyGenObj;
 
     Vector3 CoMStartPos;
 
-    public Rigidbody hips;
+    //public Rigidbody hips;
     
     void Start()
     {
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
-        CalculateCenterOfMass();
+        //CalculateCenterOfMass();
 
-        supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
-        supportPolyGenObj.GenerateNewPolygon();
+        //supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
+        //supportPolyGenObj.GenerateNewPolygon();
 
-        CoMStartPos = GetHitPos();
-        GameObject testObj = Instantiate(test, CoMStartPos, transform.rotation);
-        Debug.Log(CoMStartPos);
+        //CoMStartPos = GetHitPos();
+        //GameObject testObj = Instantiate(test, CoMStartPos, transform.rotation);
+        //Debug.Log(CoMStartPos);
     }
 
     private void Update()
     {
-        CalculateCenterOfMass();
-        AddGravityCompensation();
-        supportPolyGenObj.GenerateNewPolygon();
+        //CalculateCenterOfMass();
+        //AddGravityCompensation();
+        //supportPolyGenObj.GenerateNewPolygon();
 
-        CheckIfCoMIsBalanced();
+        //CheckIfCoMIsBalanced();
 
     }
 
@@ -98,7 +98,7 @@ public class MuscleAnimationController : MonoBehaviour
 
     //---------------------BALANCE---------------------//
 
-    public Vector3 CalculateCenterOfMass()
+    /*public Vector3 CalculateCenterOfMass()
     {
         CoM = Vector3.zero;
         float c = 0f;
@@ -112,9 +112,9 @@ public class MuscleAnimationController : MonoBehaviour
         CoM /= c;
         Debug.DrawRay(CoM, Vector3.down, Color.cyan);
         return CoM;
-    }
+    }*/
 
-    void AddGravityCompensation()
+    /*void AddGravityCompensation()
     {
         Vector3 forcePos = CalculateCenterOfMass();
         
@@ -124,9 +124,9 @@ public class MuscleAnimationController : MonoBehaviour
         //add force for keeping feet grounded
         leftFoot.AddForceAtPosition(Vector3.down * footSupportForce, footSupportPositions[0].position);
         rightFoot.AddForceAtPosition(Vector3.down * footSupportForce, footSupportPositions[1].position);
-    }
+    }*/
 
-    bool CheckIfCoMIsBalanced()
+    /*bool CheckIfCoMIsBalanced()
     {
         RaycastHit hit;
         bool balanced;
@@ -147,7 +147,7 @@ public class MuscleAnimationController : MonoBehaviour
             {
                 Vector3 compensationMovement = -(CoMMovementDir);
                 Vector3 compForce = new Vector3(compensationMovement.x, 0.0f, compensationMovement.z);
-                hips.AddForce(compForce * 40f, ForceMode.Impulse);
+                //hips.AddForce(compForce * 40f, ForceMode.Impulse);
                 Debug.DrawRay(CoM, CoMMovementDir * 10f, Color.magenta);
                 Debug.DrawRay(CoM, compForce * 10f, Color.blue);
             }
@@ -158,9 +158,9 @@ public class MuscleAnimationController : MonoBehaviour
             balanced = false;
         }
         return balanced;   
-    }
+    }*/
 
-    Vector3 GetHitPos()
+    /*Vector3 GetHitPos()
     {
         RaycastHit hit;
         Vector3 position;
@@ -176,6 +176,6 @@ public class MuscleAnimationController : MonoBehaviour
         }
 
         return position;
-    }
+    }*/
 }
 
