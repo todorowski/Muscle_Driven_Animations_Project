@@ -82,16 +82,20 @@ public class MuscleAnimationController : MonoBehaviour
     void FixedUpdate()
     {
         //Set target length according to anim curve and activate muscles
-        foreach (MuscleAnimationStruct mStruct in animationObject.muscles)
+        if (Input.GetKey(KeyCode.Space))
         {
-            foreach(MuscleWithAnim m in ragdollMuscles)
+            foreach (MuscleAnimationStruct mStruct in animationObject.muscles)
             {
-                if(m.name == mStruct.muscleName)
+                foreach (MuscleWithAnim m in ragdollMuscles)
                 {
-                    m.targetLength = mStruct.animCurve.Evaluate(animationHead);
-                    m.Activate();
+                    if (m.name == mStruct.muscleName)
+                    {
+                        m.targetLength = mStruct.animCurve.Evaluate(animationHead);
+                        m.Activate();
+                    }
                 }
             }
+            
         }
         animationHead += Time.fixedDeltaTime;
     }

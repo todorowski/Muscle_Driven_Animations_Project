@@ -19,14 +19,24 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb1.AddForceAtPosition((a2.transform.position - a1.transform.position), a1.transform.position);
-        rb2.AddForceAtPosition((a1.transform.position - a2.transform.position), a2.transform.position);
-        Debug.Log("Force rb1: " + 10f * (a2.transform.position - a1.transform.position));
-        Debug.Log("Force rb2: " + 10f * (a1.transform.position - a2.transform.position));
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb1.AddForceAtPosition((a2.transform.position - a1.transform.position), a1.transform.position);
+            rb2.AddForceAtPosition((a1.transform.position - a2.transform.position), a2.transform.position);
+            Debug.Log("Force rb1: " + 30f * (a2.transform.position - a1.transform.position));
+            Debug.Log("Force rb2: " + 30f * (a1.transform.position - a2.transform.position));
 
-        //Draw ray
-        //point from one ball to th eother
-        Debug.DrawRay(a2.transform.position, 10f * (a1.transform.position - a2.transform.position), Color.cyan);
-        Debug.DrawRay(a1.transform.position, 10f * (a2.transform.position - a1.transform.position), Color.magenta);
+            //Draw ray
+            //point from one ball to th eother
+            Debug.DrawRay(a2.transform.position, 10f * (a1.transform.position - a2.transform.position), Color.cyan);
+            Debug.DrawRay(a1.transform.position, 10f * (a2.transform.position - a1.transform.position), Color.magenta);
+        }
+        //m.targetLength = 1;
+
+        /*if (Input.GetKey(KeyCode.Space))
+        {
+            m.Activate();
+        }*/
+
     }
 }
