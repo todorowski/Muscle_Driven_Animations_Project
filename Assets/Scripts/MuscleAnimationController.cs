@@ -53,12 +53,35 @@ public class MuscleAnimationController : MonoBehaviour
 
     Vector3 CoMStartPos;
 
-    //public Rigidbody hips;
-    
+    Vector3 inertia;
+    Vector3 angularVel;
+    Vector3 angularAcc;
+    Vector3 final;
+    //public Rigidbody hips;;
+
     void Start()
     {
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
+
+        foreach(Rigidbody rb in rigidbodyList)
+        {
+            rb.centerOfMass = new Vector3(0, 0, 0);
+            rb.inertiaTensor = new Vector3(1, 1, 1);
+            if (rb.GetComponent<Collider>() != null)
+            {
+                //ignore collision on player layer
+                Physics.IgnoreLayerCollision(6,6);
+            }
+        }
+
+        /*foreach(Rigidbody rb in rigidbodyList)
+        {
+            inertia += rb.inertiaTensor;
+            angularVel += rb.angularVelocity;
+        }
+        final = Vector3.Scale(inertia, angularVel);*/
+        
         //CalculateCenterOfMass();
 
         //supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
@@ -98,6 +121,17 @@ public class MuscleAnimationController : MonoBehaviour
             
         }
         animationHead += Time.fixedDeltaTime;
+        /*Vector3 newI = Vector3.zero;
+        foreach (Rigidbody body in rigidbodyList)
+        {
+            angularAcc += (body.angularVelocity - angularVel) / Time.fixedDeltaTime;
+            angularVel = body.angularVelocity;
+
+            newI += body.inertiaTensor;
+        }
+        Vector3 current = Vector3.Scale(newI, angularAcc);
+        //Vector3 netTorque = inertia - newI;
+        Vector3 net = current - final;*/
     }
 
     //---------------------BALANCE---------------------//

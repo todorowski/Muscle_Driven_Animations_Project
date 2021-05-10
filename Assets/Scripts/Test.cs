@@ -23,8 +23,8 @@ public class Test : MonoBehaviour
         {
             rb1.AddForceAtPosition((a2.transform.position - a1.transform.position), a1.transform.position);
             rb2.AddForceAtPosition((a1.transform.position - a2.transform.position), a2.transform.position);
-            Debug.Log("Force rb1: " + 30f * (a2.transform.position - a1.transform.position));
-            Debug.Log("Force rb2: " + 30f * (a1.transform.position - a2.transform.position));
+            Debug.Log("Force rb1: " + 50f * (a2.transform.position - a1.transform.position));
+            Debug.Log("Force rb2: " + 50f * (a1.transform.position - a2.transform.position));
 
             //Draw ray
             //point from one ball to th eother

@@ -13,263 +13,22 @@ MonoBehaviour:
   m_Name: Still
   m_EditorClassIdentifier: 
   muscles:
-  - muscleName: Abdominis_Front
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.048463758
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.048463758
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
-  - muscleName: Abdominis_Back
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.038327247
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.038327247
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
-  - muscleName: L_Tigh_Front
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.118863665
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.118863665
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
-  - muscleName: L_Tigh_Back
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.10279698
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.10279698
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
-  - muscleName: Hips_Tigh_Front_R
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.112244405
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.112244405
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
-  - muscleName: Hips_Tigh_Back_R
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.13819255
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.13819255
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
-  - muscleName: R_Knee
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.36853456
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.36853456
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
-  - muscleName: R_Ankle
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.3629637
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.3629637
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
-  - muscleName: L_Knee
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.42172745
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.42172745
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
-  - muscleName: L_Ankle
-    animCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.38139412
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 4
-        value: 0.38139412
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 1
-      m_RotationOrder: 4
   - muscleName: R_Shoulder
     animCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.28270876
+        value: 0.2933758
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.2933758
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -278,7 +37,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.28270876
+        value: 0.2933758
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -286,7 +45,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: R_Biceps
     animCurve:
@@ -294,7 +53,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.3954569
+        value: 0.40164974
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.40164974
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -303,7 +71,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.3954569
+        value: 0.40164974
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -311,7 +79,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: R_Triceps
     animCurve:
@@ -319,7 +87,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.16731046
+        value: 0.20053877
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.20053877
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -328,7 +105,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.16731046
+        value: 0.20053877
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -336,7 +113,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: L_Shoulder
     animCurve:
@@ -344,7 +121,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.28511178
+        value: 0.30664572
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.30664572
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -353,7 +139,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.28511178
+        value: 0.30664572
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -361,7 +147,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: L_Biceps
     animCurve:
@@ -369,7 +155,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.3289927
+        value: 0.32414383
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.32414383
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -378,7 +173,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.3289927
+        value: 0.32414383
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -386,7 +181,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: L_Triceps
     animCurve:
@@ -394,7 +189,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.17116039
+        value: 0.18614893
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.18614893
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -403,7 +207,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.17116039
+        value: 0.18614893
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -411,7 +215,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: R_BackShoulder
     animCurve:
@@ -419,7 +223,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.37009698
+        value: 0.3131102
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.3131102
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -428,7 +241,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.37009698
+        value: 0.3131102
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -436,7 +249,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: L_BackShoulder
     animCurve:
@@ -444,7 +257,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.2827932
+        value: 0.25616664
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.25616664
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -453,7 +275,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.2827932
+        value: 0.25616664
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -461,7 +283,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: Neck_Front
     animCurve:
@@ -469,7 +291,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.049112793
+        value: 0.047411274
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.047411274
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -478,7 +309,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.049112793
+        value: 0.047411274
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -486,7 +317,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: Neck_Back
     animCurve:
@@ -494,7 +325,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.048697256
+        value: 0.047760565
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.047760565
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -503,7 +343,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.048697256
+        value: 0.047760565
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -511,7 +351,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: Neck_Left
     animCurve:
@@ -519,7 +359,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.114693135
+        value: 0.12717074
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.12717074
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -528,7 +377,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.114693135
+        value: 0.12717074
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -536,7 +385,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4
   - muscleName: Neck_Right
     animCurve:
@@ -544,7 +393,16 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.14953643
+        value: 0.14155646
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 2
+        value: 0.14155646
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -553,7 +411,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 4
-        value: 0.14953643
+        value: 0.14155646
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -561,5 +419,5 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
-      m_PostInfinity: 1
+      m_PostInfinity: 2
       m_RotationOrder: 4

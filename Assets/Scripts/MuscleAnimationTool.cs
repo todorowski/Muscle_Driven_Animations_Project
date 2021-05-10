@@ -26,8 +26,8 @@ public class MuscleAnimationTool : MonoBehaviour
         Rigidbody[] bodies = ragdollParent.GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody body in bodies)
         {
-            //body.drag = float.MaxValue;
-            //body.angularDrag = float.MaxValue;
+            body.drag = float.MaxValue;
+            body.angularDrag = float.MaxValue;
         }
 
         //Initialize animation data
