@@ -74,13 +74,6 @@ public class MuscleAnimationController : MonoBehaviour
                 Physics.IgnoreLayerCollision(6,6);
             }
         }
-
-        /*foreach(Rigidbody rb in rigidbodyList)
-        {
-            inertia += rb.inertiaTensor;
-            angularVel += rb.angularVelocity;
-        }
-        final = Vector3.Scale(inertia, angularVel);*/
         
         //CalculateCenterOfMass();
 
@@ -121,17 +114,6 @@ public class MuscleAnimationController : MonoBehaviour
             
         }
         animationHead += Time.fixedDeltaTime;
-        /*Vector3 newI = Vector3.zero;
-        foreach (Rigidbody body in rigidbodyList)
-        {
-            angularAcc += (body.angularVelocity - angularVel) / Time.fixedDeltaTime;
-            angularVel = body.angularVelocity;
-
-            newI += body.inertiaTensor;
-        }
-        Vector3 current = Vector3.Scale(newI, angularAcc);
-        //Vector3 netTorque = inertia - newI;
-        Vector3 net = current - final;*/
     }
 
     //---------------------BALANCE---------------------//
@@ -198,22 +180,6 @@ public class MuscleAnimationController : MonoBehaviour
         return balanced;   
     }*/
 
-    /*Vector3 GetHitPos()
-    {
-        RaycastHit hit;
-        Vector3 position;
-        if (Physics.Raycast(CoM, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
-        {
-            position = hit.point;
-            Debug.Log("THE HIT: " + hit.point);
-            return position;
-        }
-        else
-        {
-            position = Vector3.zero;
-        }
-
-        return position;
-    }*/
+    
 }
 
