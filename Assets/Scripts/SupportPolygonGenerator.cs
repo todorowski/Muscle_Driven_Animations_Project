@@ -25,14 +25,16 @@ public class SupportPolygonGenerator : MonoBehaviour
 
     public void GenerateNewPolygon()
     {
+        mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+
         CreateShape();
         UpdateMesh();
 
+        col = GetComponent<MeshCollider>();
         col.sharedMesh = mesh;
         //update collider
         //recalcxulate normals
-
-        
     }
 
     void CreateShape()

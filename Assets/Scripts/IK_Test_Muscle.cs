@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class IKTest_2 : MonoBehaviour
+public class IK_Test_Muscle : MonoBehaviour
 {
     public GameObject[] joints;
     private GameObject[] jointRots;
@@ -41,7 +41,7 @@ public class IKTest_2 : MonoBehaviour
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
 
-        /*foreach (Rigidbody rb in rigidbodyList)
+        foreach (Rigidbody rb in rigidbodyList)
         {
             rb.centerOfMass = new Vector3(0, 0, 0);
             rb.inertiaTensor = new Vector3(1, 1, 1);
@@ -50,7 +50,7 @@ public class IKTest_2 : MonoBehaviour
                 //ignore collision on player layer
                 Physics.IgnoreLayerCollision(6, 6);
             }
-        }*/
+        }
 
         //Get CoM
         CalculateCenterOfMass();
@@ -66,7 +66,6 @@ public class IKTest_2 : MonoBehaviour
         for (int i = 0; i < jointRots.Length; i++)
         {
             GameObject tmp = new GameObject(joints[i + 1].name + "_Rot");
-            Debug.Log("TMP: " + tmp);
             tmp.transform.position = joints[i + 1].transform.position;
             tmp.transform.parent = joints[i].transform;
             jointRots[i] = tmp;
@@ -107,6 +106,11 @@ public class IKTest_2 : MonoBehaviour
         {
             JacobianIK();
         }
+
+        /*if (Mathf.Abs(Vector3.Distance(GetCoMHit(), target)) > EPS)
+        {
+            JacobianIK();
+        }*/
         else
         {
             Debug.Log("Cycle Count: " + count.ToString());
@@ -132,8 +136,8 @@ public class IKTest_2 : MonoBehaviour
 
         Debug.Log("ANGLEDIFF: " + angleDiff[0]);
         // update angles
-        //ActivateMuscles(angleDiff);
-        rotateLinks(angleDiff);
+        ActivateMuscles(angleDiff);
+        //rotateLinks(angleDiff);
 
         count++;
     }
@@ -237,7 +241,7 @@ public class IKTest_2 : MonoBehaviour
 
     private void display_JointAngles(float[] angles, float[] actualAngles)
     {
-        
+
     }
 
     private void resetJoints()
@@ -278,7 +282,7 @@ public class IKTest_2 : MonoBehaviour
 
         if (Physics.Raycast(CoM, Vector3.down, out hit, Mathf.Infinity))
         {
-            if(hit.collider != null)
+            if (hit.collider != null)
             {
                 return hit.point;
             }
@@ -293,6 +297,4 @@ public class IKTest_2 : MonoBehaviour
 
         return c_Center;
     }
-
-
 }
