@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 
 public class IK_Test_3 : MonoBehaviour
 {
@@ -9,7 +11,8 @@ public class IK_Test_3 : MonoBehaviour
 
     public GameObject[] joints;
     private GameObject[] jointRots;
-    public GameObject target;
+    //public GameObject target;
+    Vector3 target;
 
     [Tooltip("EPS = Epsilon, how far end effector position will be from target position")]
     public float EPS = 0.5f;
@@ -22,11 +25,28 @@ public class IK_Test_3 : MonoBehaviour
     public int countMax = 1000;
     private bool startJT_Method_Flag = false;
 
+    private Vector3 CoM = Vector3.zero;
+
+    //Support polygon things
+    SupportPolygonGenerator supportPolyGenObj;
+    public GameObject supportPolyGen;
+    Collider supportPolyCol;
+
+    List<Rigidbody> rigidbodyList;
+    public Transform ragdoll;
+
 
     #region Unity_Methods
 
     void Start()
     {
+        supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
+        supportPolyGenObj.GenerateNewPolygon();
+        supportPolyCol = supportPolyGenObj.GetComponent<Collider>();
+
+        rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
+        Debug.Log("rigidbodies in list: " + rigidbodyList.Count());
+
         jointRots = new GameObject[joints.Length - 1];
         for (int i = 0; i < jointRots.Length; i++)
         {
@@ -35,10 +55,16 @@ public class IK_Test_3 : MonoBehaviour
             tmp.transform.parent = joints[i].transform;
             jointRots[i] = tmp;
         }
+
+        //Get CoM
+        CoM = CalculateCenterOfMass();
     }
 
     private void Update()
     {
+        CoM = CalculateCenterOfMass();
+        target = GetCenterOfColldier(supportPolyCol);
+        Debug.Log("current difference: " + Vector3.Distance(CalculateCenterOfMass(), target));
         if (startJT_Method_Flag)
         {
             iterate_IK();
@@ -69,13 +95,19 @@ public class IK_Test_3 : MonoBehaviour
 
         float angleA = calculateAngle(Vector3.up, joints[1].transform.position, joints[0].transform.position);
         float angleB = calculateAngle(Vector3.up, joints[2].transform.position, joints[1].transform.position);
-        float angleC = calculateAngle(Vector3.up, joints[3].transform.position, joints[2].transform.position);
-        angles = new float[] { angleA, angleB, angleC };
+        //float angleC = calculateAngle(Vector3.up, joints[3].transform.position, joints[2].transform.position);
+        angles = new float[] { angleA, angleB, /*angleC*/ };
     }
 
     private void iterate_IK()
     {
-        if (Mathf.Abs(Vector3.Distance(joints[joints.Length - 1].transform.position, target.transform.position)) > EPS)
+        /*if (Mathf.Abs(Vector3.Distance(joints[joints.Length - 1].transform.position, target.transform.position)) > EPS)
+        {
+            JacobianIK();
+            lbl_Cycles.text = string.Format("Cycle: {0}", count.ToString("0###"));
+        }*/
+
+        if (Mathf.Abs(Vector3.Distance(GetCoMHit(), target)) > EPS)
         {
             JacobianIK();
             lbl_Cycles.text = string.Format("Cycle: {0}", count.ToString("0###"));
@@ -118,11 +150,12 @@ public class IK_Test_3 : MonoBehaviour
     {
         float[,] Jt = GetJacobianTranspose();
 
-        Vector3 V = (target.transform.position - joints[joints.Length - 1].transform.position);
+        //Vector3 V = (target.transform.position - joints[joints.Length - 1].transform.position);
+        Vector3 V = (target - GetCoMHit());
 
         //dO = Jt * V;
         float[,] dO = MatrixTools.MultiplyMatrix(Jt, new float[,] { { V.x }, { V.y }, { V.z } });
-        return new float[] { dO[0, 0], dO[1, 0], dO[2, 0] };
+        return new float[] { dO[0, 0], dO[1, 0]/*, dO[2, 0]*/ };
     }
 
     private float[,] GetJacobianTranspose()
@@ -130,11 +163,11 @@ public class IK_Test_3 : MonoBehaviour
 
         Vector3 J_A = Vector3.Cross(joints[0].transform.forward, (joints[joints.Length - 1].transform.position - joints[0].transform.position));
         Vector3 J_B = Vector3.Cross(joints[1].transform.forward, (joints[joints.Length - 1].transform.position - joints[1].transform.position));
-        Vector3 J_C = Vector3.Cross(joints[2].transform.forward, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
+        //Vector3 J_C = Vector3.Cross(joints[2].transform.forward, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
 
         float[,] matrix = new float[3, 3];
 
-        matrix = MatrixTools.PopulateMatrix(matrix, new Vector3[] { J_A, J_B, J_C });
+        matrix = MatrixTools.PopulateMatrix(matrix, new Vector3[] { J_A, J_B/*, J_C*/ });
 
         return MatrixTools.TransposeMatrix(matrix);
     }
@@ -214,6 +247,46 @@ public class IK_Test_3 : MonoBehaviour
                 joints[i + 1].transform.position = jointRots[i].transform.position;
         }
 
+    }
+
+    //----------SUPPORT POLYGON THINGS--------------//
+
+    public Vector3 CalculateCenterOfMass()
+    {
+        CoM = Vector3.zero;
+        float c = 0f;
+
+        foreach (Rigidbody body in rigidbodyList)
+        {
+            CoM += body.worldCenterOfMass * body.mass;
+            c += body.mass;
+        }
+
+        CoM /= c;
+        Debug.DrawRay(CoM, Vector3.down * 2f, Color.cyan);
+        return CoM;
+    }
+
+    private Vector3 GetCoMHit()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(CoM, Vector3.down, out hit, Mathf.Infinity))
+        {
+            if (hit.collider != null)
+            {
+                return hit.point;
+            }
+        }
+        return Vector3.zero;
+    }
+
+    private Vector3 GetCenterOfColldier(Collider c)
+    {
+        c = supportPolyGenObj.GetComponent<Collider>();
+        Vector3 c_Center = c.bounds.center;
+
+        return c_Center;
     }
 
     #endregion

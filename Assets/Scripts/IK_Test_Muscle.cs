@@ -60,7 +60,6 @@ public class IK_Test_Muscle : MonoBehaviour
         supportPolyGenObj.GenerateNewPolygon();
         supportPolyCol = supportPolyGenObj.GetComponent<Collider>();
 
-
         jointRots = new GameObject[joints.Length - 1];
 
         for (int i = 0; i < jointRots.Length; i++)
@@ -95,9 +94,9 @@ public class IK_Test_Muscle : MonoBehaviour
         startJT_Method_Flag = true;
 
         float angleA = calculateAngle(Vector3.up, joints[1].transform.position, joints[0].transform.position);
-        //float angleB = calculateAngle(Vector3.up, joints[2].transform.position, joints[1].transform.position);
-        //float angleC = calculateAngle(Vector3.up, joints[3].transform.position, joints[2].transform.position);
-        angles = new float[] { angleA };
+        float angleB = calculateAngle(Vector3.up, joints[2].transform.position, joints[1].transform.position);
+        float angleC = calculateAngle(Vector3.up, joints[3].transform.position, joints[2].transform.position);
+        angles = new float[] { angleA, angleB, angleC };
     }
 
     private void iterate_IK()
@@ -150,19 +149,19 @@ public class IK_Test_Muscle : MonoBehaviour
 
         //dO = Jt * V;
         float[,] dO = MatrixTools.MultiplyMatrix(Jt, new float[,] { { V.x }, { V.y }, { V.z } });
-        return new float[] { dO[0, 0] };
+        return new float[] { dO[0, 0], dO[1,0], dO[2,0] };
     }
 
     private float[,] GetJacobianTranspose()
     {
 
         Vector3 J_A = Vector3.Cross(joints[0].transform.forward, (joints[joints.Length - 1].transform.position - joints[0].transform.position));
-        //Vector3 J_B = Vector3.Cross(joints[1].transform.forward, (joints[joints.Length - 1].transform.position - joints[1].transform.position));
-        //Vector3 J_C = Vector3.Cross(joints[2].transform.forward, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
+        Vector3 J_B = Vector3.Cross(joints[1].transform.forward, (joints[joints.Length - 1].transform.position - joints[1].transform.position));
+        Vector3 J_C = Vector3.Cross(joints[2].transform.forward, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
 
         float[,] matrix = new float[3, 3];
 
-        matrix = MatrixTools.PopulateMatrix(matrix, new Vector3[] { J_A });
+        matrix = MatrixTools.PopulateMatrix(matrix, new Vector3[] { J_A, J_B, J_C });
 
         return MatrixTools.TransposeMatrix(matrix);
     }
