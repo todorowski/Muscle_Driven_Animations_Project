@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -441,7 +441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 22045593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.106, y: 0, z: 0.088}
+  m_LocalPosition: {x: 0.146, y: -0.015, z: -0.022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907075880}
@@ -772,7 +772,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53284354}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948b89c3fb5298343b9ff9dec9282d5d, type: 3}
   m_Name: 
@@ -781,7 +781,7 @@ MonoBehaviour:
   rb2: {fileID: 805412593}
   a1: {fileID: 245442029}
   a2: {fileID: 518085545}
-  strength: 50
+  strength: 80
   name: Abdominis_Back
   Kp: 1
   Kd: 0.01
@@ -815,6 +815,7 @@ MonoBehaviour:
   ragdoll: {fileID: 56994707}
   compensationMultiplier: 40
   footSupportForce: 200
+  hipsCompensationForce: 10
   pos: {fileID: 1684492888}
   footSupportPositions:
   - {fileID: 1833763751}
@@ -2690,7 +2691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225932439}
   m_LocalRotation: {x: 0.093063004, y: 0.000000052154075, z: 0.04821057, w: 0.99449235}
-  m_LocalPosition: {x: -0.245, y: 0.007, z: -0.096}
+  m_LocalPosition: {x: -0.246, y: 0.018, z: -0.079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1351351630}
@@ -2832,7 +2833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245442028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.173, y: 0.009, z: -0.103}
+  m_LocalPosition: {x: -0.434, y: -0.007, z: -0.056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 805412592}
@@ -3051,6 +3052,7 @@ MonoBehaviour:
   ragdoll: {fileID: 277774682}
   compensationMultiplier: 0
   footSupportForce: 0
+  hipsCompensationForce: 0
   pos: {fileID: 0}
   footSupportPositions: []
   leftFoot: {fileID: 0}
@@ -3759,7 +3761,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303447473}
   m_LocalRotation: {x: 0.093063004, y: 0.000000052154075, z: 0.04821057, w: 0.99449235}
-  m_LocalPosition: {x: -0.086, y: 0.025, z: -0.062}
+  m_LocalPosition: {x: -0.155, y: 0.015, z: -0.048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1351351630}
@@ -4110,6 +4112,7 @@ MonoBehaviour:
   ragdoll: {fileID: 615651448}
   compensationMultiplier: 0
   footSupportForce: 0
+  hipsCompensationForce: 0
   pos: {fileID: 0}
   footSupportPositions: []
   leftFoot: {fileID: 0}
@@ -4436,7 +4439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371096092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.021, y: -0.078, z: 0.112}
+  m_LocalPosition: {x: -0.088, y: 0.03, z: 0.006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1711886054}
@@ -5046,7 +5049,7 @@ MonoBehaviour:
   rb2: {fileID: 1351351631}
   a1: {fileID: 662082339}
   a2: {fileID: 303447474}
-  strength: 100
+  strength: 130
   name: Hips_Tigh_Front_R
   Kp: 1
   Kd: 0.01
@@ -5105,7 +5108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414450068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0361, y: 0.0002, z: 0.0703}
+  m_LocalPosition: {x: 0.005, y: -0.006, z: 0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1258253066}
@@ -5135,7 +5138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 417740596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.406, y: 0.1, z: -0.153}
+  m_LocalPosition: {x: -0.321, y: 0.0842, z: -0.0749}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907075880}
@@ -5392,7 +5395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441657290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.174, y: -0.016, z: -0.053}
+  m_LocalPosition: {x: -0.174, y: -0.016, z: -0.051}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1781318185}
@@ -5736,7 +5739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489230718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.193, y: -0.003, z: 0.108}
+  m_LocalPosition: {x: -0.463, y: -0.003, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 805412592}
@@ -6009,7 +6012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518085544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.106, y: 0, z: -0.126}
+  m_LocalPosition: {x: 0.158, y: -0.009, z: -0.097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907075880}
@@ -6546,7 +6549,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565881020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.375, y: 0.119, z: 0.063}
+  m_LocalPosition: {x: -0.276, y: 0.083, z: -0.017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907075880}
@@ -8160,6 +8163,7 @@ MonoBehaviour:
   ragdoll: {fileID: 618402724}
   compensationMultiplier: 100
   footSupportForce: 0
+  hipsCompensationForce: 0
   pos: {fileID: 0}
   footSupportPositions: []
   leftFoot: {fileID: 0}
@@ -8261,7 +8265,7 @@ MonoBehaviour:
   rb2: {fileID: 907075883}
   a1: {fileID: 414450069}
   a2: {fileID: 760725238}
-  strength: 100
+  strength: 120
   name: Neck_Front
   Kp: 1
   Kd: 0.01
@@ -8313,7 +8317,7 @@ MonoBehaviour:
   rb2: {fileID: 2074647321}
   a1: {fileID: 1221171230}
   a2: {fileID: 1584146857}
-  strength: 100
+  strength: 130
   name: L_Tigh_Front
   Kp: 1
   Kd: 0.01
@@ -8530,7 +8534,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648440507}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.076, y: -0.026, z: 0.109}
+  m_LocalPosition: {x: -0.084, y: -0.001, z: 0.063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2074647320}
@@ -8730,7 +8734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662082338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.074, y: 0.116, z: 0}
+  m_LocalPosition: {x: -0.168, y: 0.116, z: 0.056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 805412592}
@@ -8915,7 +8919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682084457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18, y: 0, z: -0.091}
+  m_LocalPosition: {x: -0.074, y: -0, z: -0.046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1711886054}
@@ -9820,7 +9824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760725237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.317, y: 0, z: 0.082}
+  m_LocalPosition: {x: -0.217, y: -0, z: 0.082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907075880}
@@ -10578,6 +10582,7 @@ MonoBehaviour:
   ragdoll: {fileID: 839710447}
   compensationMultiplier: 0
   footSupportForce: 0
+  hipsCompensationForce: 0
   pos: {fileID: 0}
   footSupportPositions: []
   leftFoot: {fileID: 0}
@@ -11149,7 +11154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867653516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.126, y: -0.017, z: 0.0177}
+  m_LocalPosition: {x: -0.06, y: 0.0588, z: 0.017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 888112868}
@@ -11530,7 +11535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4356730523324166, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.501
+      value: 0.193
       objectReference: {fileID: 0}
     - target: {fileID: 4356730523324166, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11617,7 +11622,7 @@ PrefabInstance:
     - target: {fileID: 787725686161005077, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.30398118
+      value: 0.3176474
       objectReference: {fileID: 0}
     - target: {fileID: 787725686161005077, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf,
         type: 3}
@@ -11632,17 +11637,17 @@ PrefabInstance:
     - target: {fileID: 787725686161005077, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf,
         type: 3}
       propertyPath: m_Center.x
-      value: -0.1394541
+      value: -0.1326209
       objectReference: {fileID: 0}
     - target: {fileID: 787725686161005077, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf,
         type: 3}
       propertyPath: m_Center.y
-      value: 0.002802997
+      value: 0.0028029955
       objectReference: {fileID: 0}
     - target: {fileID: 787725686161005077, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf,
         type: 3}
       propertyPath: m_Center.z
-      value: -0.012990154
+      value: -0.012990152
       objectReference: {fileID: 0}
     - target: {fileID: 898409760868337321, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf,
         type: 3}
@@ -11652,7 +11657,7 @@ PrefabInstance:
     - target: {fileID: 898409760868337321, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf,
         type: 3}
       propertyPath: m_UseGravity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 898409760868337321, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf,
         type: 3}
@@ -12205,7 +12210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882954023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2938, y: -0.1061, z: 0.0646}
+  m_LocalPosition: {x: -0.312, y: -0.115, z: -0.016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907075880}
@@ -13006,6 +13011,7 @@ MonoBehaviour:
   ragdoll: {fileID: 916175803}
   compensationMultiplier: 0
   footSupportForce: 0
+  hipsCompensationForce: 0
   pos: {fileID: 0}
   footSupportPositions: []
   leftFoot: {fileID: 0}
@@ -13445,6 +13451,7 @@ MonoBehaviour:
   ragdoll: {fileID: 953554040}
   compensationMultiplier: 0
   footSupportForce: 0
+  hipsCompensationForce: 0
   pos: {fileID: 0}
   footSupportPositions: []
   leftFoot: {fileID: 0}
@@ -13654,7 +13661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.018668544, y: 0.96371365, z: -0.2659723, w: -0.012897229}
-  m_LocalPosition: {x: 40.14, y: 4.93, z: -15.46}
+  m_LocalPosition: {x: 33.94, y: 5.56, z: -15.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -14184,7 +14191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995403810}
   m_LocalRotation: {x: 0.093063004, y: 0.000000052154075, z: 0.04821057, w: 0.99449235}
-  m_LocalPosition: {x: -0.329, y: 0.085, z: 0.092}
+  m_LocalPosition: {x: -0.288, y: -0.001, z: 0.068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1351351630}
@@ -15092,7 +15099,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060973863}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.243, y: -0, z: 0.106}
+  m_LocalPosition: {x: -0.269, y: 0.002, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2074647320}
@@ -15784,7 +15791,7 @@ MonoBehaviour:
   rb2: {fileID: 2074647321}
   a1: {fileID: 1845964685}
   a2: {fileID: 648440508}
-  strength: 100
+  strength: 110
   name: L_Tigh_Back
   Kp: 1
   Kd: 0.01
@@ -16487,7 +16494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138944879}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.223, y: 0.017, z: -0.048}
+  m_LocalPosition: {x: -0.182, y: -0.034, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1711886054}
@@ -17179,7 +17186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221171229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.074, y: -0.11, z: -0}
+  m_LocalPosition: {x: -0.17, y: -0.093, z: 0.073}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 805412592}
@@ -17883,7 +17890,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274124441}
   m_LocalRotation: {x: -0.11350751, y: 0.00000007227935, z: -0.96346605, w: -0.2425887}
-  m_LocalPosition: {x: -0.187, y: -0.028, z: -0.083}
+  m_LocalPosition: {x: -0.0849, y: -0.0075, z: -0.0659}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 888112868}
@@ -17918,6 +17925,7 @@ MonoBehaviour:
   ragdoll: {fileID: 1275752063}
   compensationMultiplier: 0
   footSupportForce: 0
+  hipsCompensationForce: 0
   pos: {fileID: 0}
   footSupportPositions: []
   leftFoot: {fileID: 0}
@@ -18810,7 +18818,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341456026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.141, y: 0, z: -0.082}
+  m_LocalPosition: {x: -0.141, y: 0.007, z: -0.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 150379757}
@@ -19321,7 +19329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364287827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.218, y: 0.014, z: 0.075}
+  m_LocalPosition: {x: -0.169, y: -0.002, z: 0.063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 150379757}
@@ -20860,7 +20868,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530750451}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.13, y: 0.051, z: 0.01}
+  m_LocalPosition: {x: -0.13, y: 0.045, z: -0.027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1619582720}
@@ -21180,7 +21188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584146856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.076, y: -0.026, z: -0.081}
+  m_LocalPosition: {x: -0.126, y: -0.005, z: -0.062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2074647320}
@@ -21210,7 +21218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584687220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.338, y: -0.128, z: -0.122}
+  m_LocalPosition: {x: -0.336, y: -0.081, z: -0.096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907075880}
@@ -21376,7 +21384,7 @@ MonoBehaviour:
   rb2: {fileID: 888112869}
   a1: {fileID: 882954024}
   a2: {fileID: 867653517}
-  strength: 50
+  strength: 70
   name: L_Shoulder
   Kp: 1
   Kd: 0.01
@@ -22690,7 +22698,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675435881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.126, y: 0.051, z: -0.046}
+  m_LocalPosition: {x: -0.075, y: -0.045, z: 0.004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1711886054}
@@ -23476,7 +23484,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712161478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.096, y: -0.037, z: -0.111}
+  m_LocalPosition: {x: -0.096, y: -0.03, z: -0.029}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1619582720}
@@ -24378,7 +24386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804522949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.104, y: 0.116, z: -0.092}
+  m_LocalPosition: {x: -0.134, y: 0.094, z: -0.0653}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 805412592}
@@ -24902,7 +24910,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845964684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.074, y: -0.11, z: -0.127}
+  m_LocalPosition: {x: -0.144, y: -0.082, z: -0.065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 805412592}
@@ -26269,6 +26277,7 @@ MonoBehaviour:
   ragdoll: {fileID: 1909042310}
   compensationMultiplier: 0
   footSupportForce: 0
+  hipsCompensationForce: 0
   pos: {fileID: 0}
   footSupportPositions: []
   leftFoot: {fileID: 0}
@@ -26484,7 +26493,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940710174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.159, y: 0, z: 0.081}
+  m_LocalPosition: {x: -0.173, y: -0, z: 0.067}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1781318185}
@@ -26979,7 +26988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974681990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.225, y: 0, z: -0.091}
+  m_LocalPosition: {x: -0.236, y: -0.013, z: -0.088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2074647320}
@@ -27032,7 +27041,7 @@ MonoBehaviour:
   rb2: {fileID: 1351351631}
   a1: {fileID: 1804522950}
   a2: {fileID: 2100691252}
-  strength: 100
+  strength: 110
   name: Hips_Tigh_Back_R
   Kp: 1
   Kd: 0.01
@@ -28293,7 +28302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100691251}
   m_LocalRotation: {x: 0.093063004, y: 0.000000052154075, z: 0.04821057, w: 0.99449235}
-  m_LocalPosition: {x: -0.0844, y: -0.0081, z: 0.1139}
+  m_LocalPosition: {x: -0.157, y: -0.006, z: 0.066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1351351630}

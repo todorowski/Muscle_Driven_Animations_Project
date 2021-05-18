@@ -22,6 +22,7 @@ public class MuscleAnimationController : MonoBehaviour
     //public float forceMultiplier;
     public float compensationMultiplier;
     public float footSupportForce;
+    public float hipsCompensationForce;
 
     public Transform pos;
     public Transform[] footSupportPositions;
@@ -167,7 +168,7 @@ public class MuscleAnimationController : MonoBehaviour
             {
                 Vector3 compensationMovement = -(CoMMovementDir);
                 Vector3 compForce = new Vector3(compensationMovement.x, 0.0f, compensationMovement.z);
-                hips.AddForce(compForce * 20f, ForceMode.Impulse);
+                hips.AddForce(compForce * hipsCompensationForce, ForceMode.Impulse);
                 Debug.DrawRay(CoM, CoMMovementDir * 10f, Color.magenta);
                 Debug.DrawRay(CoM, compForce * 10f, Color.blue);
             }
