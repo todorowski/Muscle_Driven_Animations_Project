@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6262,7 +6262,6 @@ MonoBehaviour:
   EPS: 0.01
   step: 0.015
   ragdoll: {fileID: 453801318}
-  supportPolyGen: {fileID: 0}
   rightEdges: []
   leftEdges: []
   leftMuscles:
@@ -7141,7 +7140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 542676119}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.73, y: 11.09, z: 18.798}
+  m_LocalPosition: {x: -5.28, y: 10.02, z: 18.798}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 453801318}
@@ -11939,7 +11938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &839710444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11960,7 +11959,6 @@ MonoBehaviour:
   EPS: 0.0001
   step: 0.015
   ragdoll: {fileID: 839710447}
-  supportPolyGen: {fileID: 2107355777}
   rightEdges: []
   leftEdges: []
   leftMuscles: []
@@ -12036,7 +12034,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839710443}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e757f8d664c558642ad3d1f8e399b2a0, type: 3}
   m_Name: 
@@ -12047,10 +12045,10 @@ MonoBehaviour:
   - {fileID: 1389285804}
   - {fileID: 1742270688}
   - {fileID: 948433488}
+  target: {fileID: 0}
   EPS: 0
   step: 0.09
   countMax: 10000
-  supportPolyGen: {fileID: 2107355777}
   ragdoll: {fileID: 839710447}
 --- !u!1 &841602678
 GameObject:
@@ -12941,7 +12939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1464649480603760, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4128789420820008, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17353,7 +17351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1083311688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17372,10 +17370,10 @@ MonoBehaviour:
   - {fileID: 1138415497}
   - {fileID: 1898848623}
   - {fileID: 1869724316}
+  target: {fileID: 0}
   EPS: 0
   step: 0.09
   countMax: 10000
-  supportPolyGen: {fileID: 1026218102}
   ragdoll: {fileID: 1083311692}
 --- !u!114 &1083311689
 MonoBehaviour:
@@ -17384,7 +17382,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083311687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 986f606788ce2c84db04317ecf89d53a, type: 3}
   m_Name: 
@@ -17397,7 +17395,6 @@ MonoBehaviour:
   EPS: 0.1
   step: 0.015
   ragdoll: {fileID: 1083311692}
-  supportPolyGen: {fileID: 1026218102}
   rightEdges: []
   leftEdges: []
   leftMuscles:
@@ -24949,7 +24946,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624077944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.09, y: 8.9, z: 18.56}
+  m_LocalPosition: {x: -1.77, y: 8.9, z: 18.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2065975944}
@@ -30398,7 +30395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948718878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.1, y: 9.25, z: 18.56}
+  m_LocalPosition: {x: -2.78, y: 4.59, z: 18.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 453801318}
@@ -32012,7 +32009,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065975943}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e757f8d664c558642ad3d1f8e399b2a0, type: 3}
   m_Name: 
@@ -32024,11 +32021,11 @@ MonoBehaviour:
   - {fileID: 373804726}
   - {fileID: 1070208530}
   - {fileID: 1684158675}
+  target: {fileID: 1624077944}
   EPS: 0.5
   step: 0.015
   countMax: 1000
-  supportPolyGen: {fileID: 0}
-  ragdoll: {fileID: 0}
+  ragdoll: {fileID: 2065975944}
 --- !u!4 &2074647320 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4923861300326226, guid: f98aac9a2d9d46b43a1e3fa2fff8cecf,

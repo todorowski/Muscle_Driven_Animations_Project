@@ -11,8 +11,8 @@ public class IK_Test_3 : MonoBehaviour
 
     public GameObject[] joints;
     private GameObject[] jointRots;
-    //public GameObject target;
-    Vector3 target;
+    public GameObject target;
+    //Vector3 target;
 
     [Tooltip("EPS = Epsilon, how far end effector position will be from target position")]
     public float EPS = 0.5f;
@@ -29,9 +29,9 @@ public class IK_Test_3 : MonoBehaviour
     private Vector3 CoM = Vector3.zero;
 
     //Support polygon things
-    SupportPolygonGenerator supportPolyGenObj;
-    public GameObject supportPolyGen;
-    Collider supportPolyCol;
+    //SupportPolygonGenerator supportPolyGenObj;
+    //public GameObject supportPolyGen;
+    //Collider supportPolyCol;
 
     List<Rigidbody> rigidbodyList;
     public Transform ragdoll;
@@ -41,12 +41,12 @@ public class IK_Test_3 : MonoBehaviour
 
     void Start()
     {
-        supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
+        /*supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
         supportPolyGenObj.GenerateNewPolygon();
         supportPolyCol = supportPolyGenObj.GetComponent<Collider>();
 
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
-        Debug.Log("rigidbodies in list: " + rigidbodyList.Count());
+        Debug.Log("rigidbodies in list: " + rigidbodyList.Count());*/
 
         jointRots = new GameObject[joints.Length - 1];
         for (int i = 0; i < jointRots.Length; i++)
@@ -58,15 +58,15 @@ public class IK_Test_3 : MonoBehaviour
         }
 
         //Get CoM
-        CoM = CalculateCenterOfMass();
+        //CoM = CalculateCenterOfMass();
     }
 
     private void Update()
     {
-        CoM = CalculateCenterOfMass();
-        CoMHit = GetCoMHit();
-        target = GetCenterOfColldier(supportPolyCol);
-        Debug.Log("current difference: " + Vector3.Distance(target, CoMHit));
+        //CoM = CalculateCenterOfMass();
+        //CoMHit = GetCoMHit();
+        //target = GetCenterOfColldier(supportPolyCol);
+        //Debug.Log("current difference: " + Vector3.Distance(target, CoMHit));
         if (startJT_Method_Flag)
         {
             iterate_IK();
@@ -97,23 +97,23 @@ public class IK_Test_3 : MonoBehaviour
 
         float angleA = calculateAngle(Vector3.up, joints[1].transform.position, joints[0].transform.position);
         float angleB = calculateAngle(Vector3.up, joints[2].transform.position, joints[1].transform.position);
-        //float angleC = calculateAngle(Vector3.up, joints[3].transform.position, joints[2].transform.position);
-        angles = new float[] { angleA, angleB, /*angleC*/ };
+        float angleC = calculateAngle(Vector3.up, joints[3].transform.position, joints[2].transform.position);
+        angles = new float[] { angleA, angleB, angleC };
     }
 
     private void iterate_IK()
     {
-        /*if (Mathf.Abs(Vector3.Distance(joints[joints.Length - 1].transform.position, target.transform.position)) > EPS)
-        {
-            JacobianIK();
-            lbl_Cycles.text = string.Format("Cycle: {0}", count.ToString("0###"));
-        }*/
-
-        if (Mathf.Abs(Vector3.Distance(new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().y), new Vector3(target.x, 0.0f, target.y))) > EPS)
+        if (Mathf.Abs(Vector3.Distance(joints[joints.Length - 1].transform.position, target.transform.position)) > EPS)
         {
             JacobianIK();
             lbl_Cycles.text = string.Format("Cycle: {0}", count.ToString("0###"));
         }
+
+        /*if (Mathf.Abs(Vector3.Distance(new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().y), new Vector3(target.x, 0.0f, target.y))) > EPS)
+        {
+            JacobianIK();
+            lbl_Cycles.text = string.Format("Cycle: {0}", count.ToString("0###"));
+        }*/
         else
         {
             Debug.Log("Cycle Count: " + count.ToString());
@@ -152,14 +152,14 @@ public class IK_Test_3 : MonoBehaviour
     {
         float[,] Jt = GetJacobianTranspose();
 
-        //Vector3 V = (target.transform.position - joints[joints.Length - 1].transform.position);
+        Vector3 V = (target.transform.position - joints[joints.Length - 1].transform.position);
         //Vector3 V = (target - GetCoMHit());
         //Vector3 V = new Vector3(target.x, 0.0f, target.z) - new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().z);
-        Vector3 V = new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().z) - new Vector3(target.x, 0.0f, target.z);
+        //Vector3 V = new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().z) - new Vector3(target.x, 0.0f, target.z);
 
         //dO = Jt * V;
         float[,] dO = MatrixTools.MultiplyMatrix(Jt, new float[,] { { V.x }, { V.y }, { V.z } });
-        return new float[] { dO[0, 0], dO[1, 0]/*, dO[2, 0]*/ };
+        return new float[] { dO[0, 0], dO[1, 0], dO[2, 0] };
     }
 
     private float[,] GetJacobianTranspose()
@@ -167,11 +167,11 @@ public class IK_Test_3 : MonoBehaviour
 
         Vector3 J_A = Vector3.Cross(joints[0].transform.forward, (joints[joints.Length - 1].transform.position - joints[0].transform.position));
         Vector3 J_B = Vector3.Cross(joints[1].transform.forward, (joints[joints.Length - 1].transform.position - joints[1].transform.position));
-        //Vector3 J_C = Vector3.Cross(joints[2].transform.forward, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
+        Vector3 J_C = Vector3.Cross(joints[2].transform.forward, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
 
         float[,] matrix = new float[3, 3];
 
-        matrix = MatrixTools.PopulateMatrix(matrix, new Vector3[] { J_A, J_B/*, J_C*/ });
+        matrix = MatrixTools.PopulateMatrix(matrix, new Vector3[] { J_A, J_B, J_C });
 
         return MatrixTools.TransposeMatrix(matrix);
     }
@@ -255,7 +255,7 @@ public class IK_Test_3 : MonoBehaviour
 
     //----------SUPPORT POLYGON THINGS--------------//
 
-    public Vector3 CalculateCenterOfMass()
+    /*public Vector3 CalculateCenterOfMass()
     {
         CoM = Vector3.zero;
         float c = 0f;
@@ -291,7 +291,7 @@ public class IK_Test_3 : MonoBehaviour
         Vector3 c_Center = c.bounds.center;
 
         return c_Center;
-    }
+    }*/
 
     #endregion
 

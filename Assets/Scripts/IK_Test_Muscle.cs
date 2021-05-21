@@ -32,9 +32,10 @@ public class IK_Test_Muscle : MonoBehaviour
     float currentLength6 = 0.0f;
 
     //Support polygon things
-    SupportPolygonGenerator supportPolyGenObj;
+    /*SupportPolygonGenerator supportPolyGenObj;
     public GameObject supportPolyGen;
-    Collider supportPolyCol;
+    Collider supportPolyCol;*/
+
     public Transform[] rightEdges;
     public Transform[] leftEdges;
 
@@ -63,23 +64,23 @@ public class IK_Test_Muscle : MonoBehaviour
             }
         }
 
-        //Get CoM
-        CoM = CalculateCenterOfMass();
-        Debug.Log("COM POS: " + CoM.x + CoM.y + CoM.z);
+        //jointRots = new GameObject[joints.Length - 1];
 
-        supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
-        supportPolyGenObj.GenerateNewPolygon();
-        supportPolyCol = supportPolyGenObj.GetComponent<Collider>();
-
-        jointRots = new GameObject[joints.Length - 1];
-
-        for (int i = 0; i < jointRots.Length; i++)
+        /*for (int i = 0; i < jointRots.Length; i++)
         {
             GameObject tmp = new GameObject(joints[i + 1].name + "_Rot");
             tmp.transform.position = joints[i + 1].transform.position;
             tmp.transform.parent = joints[i].transform;
             jointRots[i] = tmp;
-        }
+        }*/
+
+        //Get CoM
+        /*CoM = CalculateCenterOfMass();
+        Debug.Log("COM POS: " + CoM.x + CoM.y + CoM.z);
+
+        supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
+        supportPolyGenObj.GenerateNewPolygon();
+        supportPolyCol = supportPolyGenObj.GetComponent<Collider>();*/
 
         //fill current lengths array with all of the current lengths
         leftCurrentLengths = new float[leftMuscles.Length];
@@ -110,8 +111,8 @@ public class IK_Test_Muscle : MonoBehaviour
         }
 
         //CoM - Support poly things
-        CoM = CalculateCenterOfMass();
-        CoMHit = GetCoMHit();
+        /*CoM = CalculateCenterOfMass();
+        CoMHit = GetCoMHit();*/
         //target = GetCenterOfColldier(supportPolyCol);
     }
 
@@ -157,13 +158,10 @@ public class IK_Test_Muscle : MonoBehaviour
         dO = GetDeltaOrientation();
         for (int i = 0; i < dO.Length; i++)
         {
-            Debug.Log("dO: " + i + ":" + dO[i]);
             angles[i] += dO[i] * step;
             angleDiff[i] = dO[i] * step;
-            Debug.Log("anglediff: " + i + ":" + angleDiff[i]);
         }
 
-        Debug.Log("ANGLEDIFF: " + angleDiff[0]);
         // update angles
         rotateLinks2(angleDiff);
         //rotateLinks(angleDiff);
@@ -229,8 +227,8 @@ public class IK_Test_Muscle : MonoBehaviour
             //else ActivateMuscles(rightMuscles[i])
 
 
-            if (i < joints.Length - 2)
-                updateLinkPos(i, joints[i].transform.position, crossAxis, angleDiff[i]);
+            //if (i < joints.Length - 2)
+                //updateLinkPos(i, joints[i].transform.position, crossAxis, angleDiff[i]);
             if (i >= joints.Length - 2) // end effector
                 joints[i + 1].transform.position = jointRots[i].transform.position;
 
@@ -253,17 +251,19 @@ public class IK_Test_Muscle : MonoBehaviour
 
             if (newAngle >= 0)
             {
+                Debug.Log("LEFT MUSCLES!");
                 ActivateMuscles(leftMuscles[i], newAngle);
             }
             if(newAngle < 0)
             {
+                Debug.Log("RIGHT MUSCLES!");
                 ActivateMuscles(rightMuscles[i], newAngle);
             }
 
-            if (i < joints.Length - 2)
+            /*if (i < joints.Length - 2)
                 updateLinkPos(i, joints[i].transform.position, crossAxis, angleDiff[i]);
             if (i >= joints.Length - 2) // end effector
-                joints[i + 1].transform.position = jointRots[i].transform.position;
+                joints[i + 1].transform.position = jointRots[i].transform.position;*/
 
             //Debug.Log("joint " + (i + 1).ToString() + ": New angle Value: " + angleDiff[i].ToString());
         }
@@ -274,34 +274,21 @@ public class IK_Test_Muscle : MonoBehaviour
         float currentLength = (m.a1.position - m.a2.position).magnitude;
         m.targetLength = currentLength + angle;
         m.Activate();
-        currentLength += angle;
-        //current length
-        //new length = current + angle (?)
-        //m.Activate(new length)
-        //current ´length = new length ?
-
-        //activate biceps
-        /*ragdollMuscles[0].targetLength = currentLength1 + angleDiff[0];
-        ragdollMuscles[0].Activate();
-        currentLength1 += angleDiff[0];*/
-        
-        //activate triceps
-        /*ragdollMuscles[1].targetLength = currentLength2 + angleDiff[0];
-        ragdollMuscles[1].Activate();
-        currentLength2 += angleDiff[0];*/
-       
+        //currentLength += angle;
     }
 
     private void updateLinkPos(int p, Vector3 rotPos, Vector3 cross, float angle)
     {
+        Debug.Log("IN UPDATELINKPOS!!");
         if (p >= joints.Length - 2)
             return;
 
         for (int i = p; i < jointRots.Length; i++)
+        {
             joints[i + 1].transform.position = jointRots[i].transform.position;
-
+            Debug.Log("JOINT ROTS: " + jointRots[i]);
+        }
         return;
-
     }
 
     private void display_JointAngles(float[] angles, float[] actualAngles)
@@ -325,7 +312,7 @@ public class IK_Test_Muscle : MonoBehaviour
 
     //----------SUPPORT POLYGON THINGS--------------//
 
-    public Vector3 CalculateCenterOfMass()
+    /*public Vector3 CalculateCenterOfMass()
     {
         CoM = Vector3.zero;
         float c = 0f;
@@ -361,5 +348,5 @@ public class IK_Test_Muscle : MonoBehaviour
         Vector3 c_Center = c.bounds.center;
 
         return c_Center;
-    }
+    }*/
 }
