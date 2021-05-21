@@ -83,7 +83,6 @@ public class MuscleAnimationController : MonoBehaviour
 
         CoMStartPos = GetHitPos();
         Debug.Log("COM start pos: " + CoMStartPos);
-        GameObject testObj = Instantiate(test, CoMStartPos, transform.rotation);
     }
 
     private void Update()
@@ -138,26 +137,30 @@ public class MuscleAnimationController : MonoBehaviour
     void AddGravityCompensation()
     {
         Vector3 forcePos = CalculateCenterOfMass();
+        
         addForce.AddForceAtPosition(Vector3.up * compensationMultiplier, pos.position);
+        Debug.DrawRay(forcePos, Vector3.up * compensationMultiplier, Color.cyan);
 
         //add force for keeping feet grounded
         leftFoot.AddForceAtPosition(Vector3.down * footSupportForce, footSupportPositions[0].position);
         rightFoot.AddForceAtPosition(Vector3.down * footSupportForce, footSupportPositions[1].position);
     }
 
-    void CheckIfCoMIsBalanced()
+    bool CheckIfCoMIsBalanced()
     {
         RaycastHit hit;
+        bool balanced;
         
         if(Physics.Raycast(CoM, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
         {
             //called in update so this value will change, save value from start
             Vector3 hitPointInCol = hit.point;
+            Debug.Log("hit in collider: " + hit.point);
 
             //Get the direction CoM is moving in from start pos
             Vector3 CoMMovementDir = hitPointInCol - CoMStartPos;
+            Debug.Log("COM movement: " + CoMMovementDir);
 
-            //how to make this value signed?
             float CoMMovementDirMag = Mathf.Abs(CoMMovementDir.magnitude);
             if(CoMMovementDirMag > 0.001f)
             {
@@ -167,15 +170,13 @@ public class MuscleAnimationController : MonoBehaviour
                 Debug.DrawRay(CoM, CoMMovementDir * 10f, Color.magenta);
                 Debug.DrawRay(CoM, compForce * 10f, Color.blue);
             }
+            balanced = true;
         }
         else
         {
-            //fall
-            //set all compensating movement to 0
-            hipsCompensationForce = 0.0f;
-            footSupportForce = 0.0f;
-            compensationMultiplier = 0.0f;
-        } 
+            balanced = false;
+        }
+        return balanced;   
     }
 
     private Vector3 GetHitPos()

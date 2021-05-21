@@ -25,6 +25,7 @@ public class IK_Test_3 : MonoBehaviour
     public int countMax = 1000;
     private bool startJT_Method_Flag = false;
 
+    private Vector3 CoMHit = Vector3.zero;
     private Vector3 CoM = Vector3.zero;
 
     //Support polygon things
@@ -63,8 +64,9 @@ public class IK_Test_3 : MonoBehaviour
     private void Update()
     {
         CoM = CalculateCenterOfMass();
+        CoMHit = GetCoMHit();
         target = GetCenterOfColldier(supportPolyCol);
-        Debug.Log("current difference: " + Vector3.Distance(CalculateCenterOfMass(), target));
+        Debug.Log("current difference: " + Vector3.Distance(target, CoMHit));
         if (startJT_Method_Flag)
         {
             iterate_IK();
@@ -107,7 +109,7 @@ public class IK_Test_3 : MonoBehaviour
             lbl_Cycles.text = string.Format("Cycle: {0}", count.ToString("0###"));
         }*/
 
-        if (Mathf.Abs(Vector3.Distance(GetCoMHit(), target)) > EPS)
+        if (Mathf.Abs(Vector3.Distance(new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().y), new Vector3(target.x, 0.0f, target.y))) > EPS)
         {
             JacobianIK();
             lbl_Cycles.text = string.Format("Cycle: {0}", count.ToString("0###"));
@@ -151,7 +153,9 @@ public class IK_Test_3 : MonoBehaviour
         float[,] Jt = GetJacobianTranspose();
 
         //Vector3 V = (target.transform.position - joints[joints.Length - 1].transform.position);
-        Vector3 V = (target - GetCoMHit());
+        //Vector3 V = (target - GetCoMHit());
+        //Vector3 V = new Vector3(target.x, 0.0f, target.z) - new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().z);
+        Vector3 V = new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().z) - new Vector3(target.x, 0.0f, target.z);
 
         //dO = Jt * V;
         float[,] dO = MatrixTools.MultiplyMatrix(Jt, new float[,] { { V.x }, { V.y }, { V.z } });
