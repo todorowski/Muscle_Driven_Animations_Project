@@ -41,11 +41,14 @@ public class IK_Test_Muscle : MonoBehaviour
 
     public MuscleWithAnim[] leftMuscles;
     public MuscleWithAnim[] rightMuscles;
+    public MuscleWithAnim[] frontMuscles;
     float[] leftCurrentLengths;
     float[] rightCurrentLengths;
+    float[] frontCurrentLengths;
 
     private Vector3 CoMHit = Vector3.zero;
     private Vector3 CoM = Vector3.zero;
+    Vector3 targetPos = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -85,8 +88,9 @@ public class IK_Test_Muscle : MonoBehaviour
         //fill current lengths array with all of the current lengths
         leftCurrentLengths = new float[leftMuscles.Length];
         rightCurrentLengths = new float[rightMuscles.Length];
+        frontCurrentLengths = new float[frontMuscles.Length];
 
-        for(int i = 0; i < leftCurrentLengths.Length; i++)
+        for (int i = 0; i < leftCurrentLengths.Length; i++)
         {
             leftCurrentLengths[i] = (leftMuscles[i].a1.position - leftMuscles[i].a2.position).magnitude;
         }
@@ -95,6 +99,13 @@ public class IK_Test_Muscle : MonoBehaviour
         {
             rightCurrentLengths[i] = (rightMuscles[i].a1.position - rightMuscles[i].a2.position).magnitude;
         }
+
+        for (int i = 0; i < frontCurrentLengths.Length; i++)
+        {
+            frontCurrentLengths[i] = (frontMuscles[i].a1.position - frontMuscles[i].a2.position).magnitude;
+        }
+
+        Vector3 targetPos = target.transform.position;
     }
 
     // Update is called once per frame
@@ -242,12 +253,15 @@ public class IK_Test_Muscle : MonoBehaviour
 
         for (int i = 0; i < joints.Length - 1; i++)
         {
+            Debug.Log("I" + i);
             Vector3 upDir = joints[i].transform.right;
 
             Vector3 crossAxis = Vector3.Cross(upDir, (joints[i + 1].transform.position - joints[i].transform.position).normalized);
             float currAngle = calculateAngle(Vector3.up, joints[i + 1].transform.position, joints[i].transform.position);
             float newAngle = angleDiff[i];
             displayAngles[i] = angleDiff[i] + currAngle;
+
+            //ActivateMuscles(i, angleDiff[i]);
 
             if (newAngle >= 0)
             {
@@ -260,6 +274,14 @@ public class IK_Test_Muscle : MonoBehaviour
                 ActivateMuscles(rightMuscles[i], newAngle);
             }
 
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.Log("EIIII TRUE");
+                ActivateMuscles(frontMuscles[i], newAngle);
+            }
+            Debug.Log("ANGLE: " + newAngle);
+
+            Debug.Log("TARGET POS: " + target.transform.position);
             /*if (i < joints.Length - 2)
                 updateLinkPos(i, joints[i].transform.position, crossAxis, angleDiff[i]);
             if (i >= joints.Length - 2) // end effector

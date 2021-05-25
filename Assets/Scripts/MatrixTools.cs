@@ -27,7 +27,7 @@ public class MatrixTools : MonoBehaviour
         {
             matrix[0, i] = pos[i].x;
             matrix[1, i] = pos[i].y;
-            //matrix[2, i] = pos[i].z;
+            matrix[2, i] = pos[i].z;
         }
 
         return matrix;
