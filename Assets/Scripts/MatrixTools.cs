@@ -26,8 +26,17 @@ public class MatrixTools : MonoBehaviour
         for (int i = 0; i < pos.Length; i++)
         {
             matrix[0, i] = pos[i].x;
+            /*matrix[1, i] = pos[i].y;
+            matrix[2, i] = pos[i].z;
+
+            matrix[0, i] = pos[i].x;
             matrix[1, i] = pos[i].y;
             matrix[2, i] = pos[i].z;
+
+            matrix[0, i] = pos[i].x;
+            matrix[1, i] = pos[i].y;
+            matrix[2, i] = pos[i].z;*/
+
         }
 
         return matrix;
@@ -47,6 +56,8 @@ public class MatrixTools : MonoBehaviour
             {
                 for (int j = 0; j < cB; j++)
                 {
+                    Debug.Log("J: " + j);
+                    Debug.Log("cB: " + cB);
                     C[i, j] = 0;
                     for (int k = 0; k < cA; k++) // OR k<b.GetLength(0)
                         C[i, j] += A[i, k] * B[k, j];

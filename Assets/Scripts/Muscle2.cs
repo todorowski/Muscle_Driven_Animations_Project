@@ -222,6 +222,7 @@ public class Muscle2
         q = Mathf.Min(Mathf.Max((float)q, 0.001f), 1.0f);
         q *= 100;
         q = Mathf.Round((float)q);
+        Debug.Log("INITIAL LENTHS: " + initialLengths[(int)(q - 1)]);
         return initialLengths[(int)(q - 1)];
     }
 

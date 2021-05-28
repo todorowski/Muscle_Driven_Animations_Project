@@ -23,13 +23,7 @@ public class IK_Test_Muscle : MonoBehaviour
 
     //List of muscles
     List<MuscleWithAnim> ragdollMuscles = new List<MuscleWithAnim>();
-
-    float currentLength1 = 0.0f;
-    float currentLength2 = 0.0f;
-    float currentLength3 = 0.0f;
-    float currentLength4 = 0.0f;
-    float currentLength5 = 0.0f;
-    float currentLength6 = 0.0f;
+    public List<MuscleWithAnim[]> musclePairs = new List<MuscleWithAnim[]>();
 
     //Support polygon things
     /*SupportPolygonGenerator supportPolyGenObj;
@@ -39,16 +33,12 @@ public class IK_Test_Muscle : MonoBehaviour
     public Transform[] rightEdges;
     public Transform[] leftEdges;
 
-    public MuscleWithAnim[] leftMuscles;
-    public MuscleWithAnim[] rightMuscles;
-    public MuscleWithAnim[] frontMuscles;
-    float[] leftCurrentLengths;
-    float[] rightCurrentLengths;
-    float[] frontCurrentLengths;
-
     private Vector3 CoMHit = Vector3.zero;
     private Vector3 CoM = Vector3.zero;
     Vector3 targetPos = Vector3.zero;
+
+    [SerializeField]
+    private MusclePair[] pairs;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +56,7 @@ public class IK_Test_Muscle : MonoBehaviour
                 Physics.IgnoreLayerCollision(6, 6);
             }
         }
+        Vector3 targetPos = target.transform.position;
 
         //jointRots = new GameObject[joints.Length - 1];
 
@@ -84,43 +75,18 @@ public class IK_Test_Muscle : MonoBehaviour
         supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
         supportPolyGenObj.GenerateNewPolygon();
         supportPolyCol = supportPolyGenObj.GetComponent<Collider>();*/
-
-        //fill current lengths array with all of the current lengths
-        leftCurrentLengths = new float[leftMuscles.Length];
-        rightCurrentLengths = new float[rightMuscles.Length];
-        frontCurrentLengths = new float[frontMuscles.Length];
-
-        for (int i = 0; i < leftCurrentLengths.Length; i++)
-        {
-            leftCurrentLengths[i] = (leftMuscles[i].a1.position - leftMuscles[i].a2.position).magnitude;
-        }
-
-        for (int i = 0; i < rightCurrentLengths.Length; i++)
-        {
-            rightCurrentLengths[i] = (rightMuscles[i].a1.position - rightMuscles[i].a2.position).magnitude;
-        }
-
-        for (int i = 0; i < frontCurrentLengths.Length; i++)
-        {
-            frontCurrentLengths[i] = (frontMuscles[i].a1.position - frontMuscles[i].a2.position).magnitude;
-        }
-
-        Vector3 targetPos = target.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        targetPos = target.transform.position;
         if (startJT_Method_Flag)
         {
             iterate_IK();
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            start_IK();
-        }
-
+        start_IK();
+        
         //CoM - Support poly things
         /*CoM = CalculateCenterOfMass();
         CoMHit = GetCoMHit();*/
@@ -140,6 +106,7 @@ public class IK_Test_Muscle : MonoBehaviour
 
     private void iterate_IK()
     {
+        
         if (Mathf.Abs(Vector3.Distance(joints[joints.Length - 1].transform.position, target.transform.position)) > EPS)
         {
             JacobianIK();
@@ -182,35 +149,49 @@ public class IK_Test_Muscle : MonoBehaviour
 
     private float[] GetDeltaOrientation()
     {
+        //varje index skillnaden för varje joint
         float[,] Jt = GetJacobianTranspose();
 
         Vector3 V = (target.transform.position - joints[joints.Length - 1].transform.position);
         //Vector3 V = new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().z) - new Vector3(target.x, 0.0f, target.z);
-
+        //multiplicera min jacobian tyranspose med v
 
         //dO = Jt * V;
-        float[,] dO = MatrixTools.MultiplyMatrix(Jt, new float[,] { { V.x }, { V.y }, { V.z } });
+        float[,] dO = MatrixTools.MultiplyMatrix(Jt, new float[,] { { V.x }, { V.y }, { V.z }/*, { V.x }, { V.y }, { V.z }, { V.x }, { V.y }, { V.z }*/ });
+        //varje float är en kolumn i matrisen
+        //varför förasta vädet i varje kolumn?
+        //testa ta ut alla värden? 
         return new float[] { dO[0, 0], dO[1,0], dO[2,0] };
     }
 
     private float[,] GetJacobianTranspose()
     {
-
+        //måste endra detta för min matris
+        //one line for each joint
+        //forward right left för varje joint
+        //tre per joint
+        //ta ut alla nummer per joint
         Vector3 J_A = Vector3.Cross(joints[0].transform.forward, (joints[joints.Length - 1].transform.position - joints[0].transform.position));
         Vector3 J_B = Vector3.Cross(joints[1].transform.forward, (joints[joints.Length - 1].transform.position - joints[1].transform.position));
         Vector3 J_C = Vector3.Cross(joints[2].transform.forward, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
 
+        /*Vector3 J_A1 = Vector3.Cross(joints[0].transform.right, (joints[joints.Length - 1].transform.position - joints[0].transform.position));
+        Vector3 J_B1 = Vector3.Cross(joints[1].transform.right, (joints[joints.Length - 1].transform.position - joints[1].transform.position));
+        Vector3 J_C1 = Vector3.Cross(joints[2].transform.right, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
+
+        Vector3 J_A2 = Vector3.Cross(-joints[0].transform.right, (joints[joints.Length - 1].transform.position - joints[0].transform.position));
+        Vector3 J_B2 = Vector3.Cross(-joints[1].transform.right, (joints[joints.Length - 1].transform.position - joints[1].transform.position));
+        Vector3 J_C2 = Vector3.Cross(-joints[2].transform.right, (joints[joints.Length - 1].transform.position - joints[2].transform.position));*/
+
+        //float[,] matrix = new float[9,9];
         float[,] matrix = new float[3, 3];
-
-        matrix = MatrixTools.PopulateMatrix(matrix, new Vector3[] { J_A, J_B, J_C });
-
+        matrix = MatrixTools.PopulateMatrix(matrix, new Vector3[] { J_A, J_B, J_C, /*J_A1, J_B1, J_C1, J_A2, J_B2, J_C2*/ });
         return MatrixTools.TransposeMatrix(matrix);
     }
 
     private float calculateAngle(Vector3 axis, Vector3 pos1, Vector3 pos2)
     {
         float value = 0f;
-
         value = Vector3.Angle(axis, (pos1 - pos2).normalized);
         Vector3 cross = Vector3.Cross(axis, (pos1 - pos2).normalized);
         if (cross.z < 0)
@@ -253,7 +234,6 @@ public class IK_Test_Muscle : MonoBehaviour
 
         for (int i = 0; i < joints.Length - 1; i++)
         {
-            Debug.Log("I" + i);
             Vector3 upDir = joints[i].transform.right;
 
             Vector3 crossAxis = Vector3.Cross(upDir, (joints[i + 1].transform.position - joints[i].transform.position).normalized);
@@ -261,75 +241,58 @@ public class IK_Test_Muscle : MonoBehaviour
             float newAngle = angleDiff[i];
             displayAngles[i] = angleDiff[i] + currAngle;
 
-            //ActivateMuscles(i, angleDiff[i]);
-
-            if (newAngle >= 0)
-            {
-                Debug.Log("LEFT MUSCLES!");
-                ActivateMuscles(leftMuscles[i], newAngle);
-            }
-            if(newAngle < 0)
-            {
-                Debug.Log("RIGHT MUSCLES!");
-                ActivateMuscles(rightMuscles[i], newAngle);
-            }
-
-            if(Input.GetKeyDown(KeyCode.P))
-            {
-                Debug.Log("EIIII TRUE");
-                ActivateMuscles(frontMuscles[i], newAngle);
-            }
-            Debug.Log("ANGLE: " + newAngle);
-
-            Debug.Log("TARGET POS: " + target.transform.position);
-            /*if (i < joints.Length - 2)
-                updateLinkPos(i, joints[i].transform.position, crossAxis, angleDiff[i]);
-            if (i >= joints.Length - 2) // end effector
-                joints[i + 1].transform.position = jointRots[i].transform.position;*/
-
-            //Debug.Log("joint " + (i + 1).ToString() + ": New angle Value: " + angleDiff[i].ToString());
+            ActivateMuscles2(angleDiff[i], i);
         }
     }
 
-    private void ActivateMuscles(MuscleWithAnim m, float angle)
+    private void ActivateMuscles2(float angle, int index)
     {
-        float currentLength = (m.a1.position - m.a2.position).magnitude;
-        m.targetLength = currentLength + angle;
-        m.Activate();
-        //currentLength += angle;
-    }
-
-    private void updateLinkPos(int p, Vector3 rotPos, Vector3 cross, float angle)
-    {
-        Debug.Log("IN UPDATELINKPOS!!");
-        if (p >= joints.Length - 2)
-            return;
-
-        for (int i = p; i < jointRots.Length; i++)
+        for(int i = 0; i < pairs.Length; i++)
         {
-            joints[i + 1].transform.position = jointRots[i].transform.position;
-            Debug.Log("JOINT ROTS: " + jointRots[i]);
+            MusclePair p = pairs[i];
+
+            Debug.Log(i);
+            if(i == index)
+            {
+                if (angle <= 0)
+                {
+                    MuscleWithAnim toActivate = p.muscles[0];
+                    float length = GetMuscleLengthFromAngle(toActivate, angle);
+                    toActivate.targetLength = length;
+                    Debug.Log("LENGHT: " + length);
+                    toActivate.Activate();
+                }
+                else
+                {
+                    MuscleWithAnim toActivate = p.muscles[1];
+                    float length = GetMuscleLengthFromAngle(toActivate, angle);
+                    toActivate.targetLength = length;
+                    Debug.Log("LENGHT: " + length);
+                    toActivate.Activate();
+                }  
+            }
         }
-        return;
     }
 
-    private void display_JointAngles(float[] angles, float[] actualAngles)
+    private float GetMuscleLengthFromAngle(MuscleWithAnim m, float newAngle)
     {
+        Rigidbody rb1 = m.GetComponent<MuscleWithAnim>().rb1;
 
-    }
+        Transform a1 = m.GetComponent<MuscleWithAnim>().a1;
+        Transform a2 = m.GetComponent<MuscleWithAnim>().a2;
 
-    private void resetJoints()
-    {
-        for (int i = 0; i < joints.Length - 1; i++)
-        {
-            joints[i].transform.rotation = new Quaternion(0f, 0f, 0f, joints[i].transform.rotation.w);
+        float triangleSideB = (rb1.GetComponent<CharacterJoint>().anchor - a1.position).magnitude;
+        float triangleSideC = (rb1.GetComponent<CharacterJoint>().connectedAnchor - a2.position).magnitude;
 
-            if (i > 0)
-                joints[i].transform.position = jointRots[i - 1].transform.position;
-            if (i >= joints.Length - 2) // end effector
-                joints[i + 1].transform.position = jointRots[i].transform.position;
-        }
+        float triangleSideA;
+        float angle = newAngle;
 
+        //find hypotenuse using law of cosines
+        //a^2 = b^2 + c^2 - 2bc cos(A)
+        float triangleSideASqr = Mathf.Pow(triangleSideB, 2) + Mathf.Pow(triangleSideC, 2) - (2 * triangleSideB * triangleSideC * Mathf.Cos(angle));
+        triangleSideA = Mathf.Sqrt(triangleSideASqr);
+
+        return triangleSideA;
     }
 
     //----------SUPPORT POLYGON THINGS--------------//
@@ -371,4 +334,11 @@ public class IK_Test_Muscle : MonoBehaviour
 
         return c_Center;
     }*/
+}
+
+[System.Serializable]
+public struct MusclePair
+{
+    [SerializeField]
+    public MuscleWithAnim[] muscles;
 }
