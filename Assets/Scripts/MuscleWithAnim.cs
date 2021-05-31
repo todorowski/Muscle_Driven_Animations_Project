@@ -24,6 +24,8 @@ public class MuscleWithAnim : MonoBehaviour
     Muscle2 muscle;
     MuscleBasedPD pd;
 
+    bool isActive = false;
+
     [System.NonSerialized]
     public float targetLength;
 
@@ -39,6 +41,7 @@ public class MuscleWithAnim : MonoBehaviour
 
     public void Activate()
     {
+        
         if (activationValue > 0)
         {
             DeactivateMuscle();
@@ -52,6 +55,7 @@ public class MuscleWithAnim : MonoBehaviour
 
     private void ActivateMuscle()
     {
+        isActive = true;
         //Muscle force cannot be lower than 0.01f
         if (activationValue < 0.01f)
         {
@@ -71,6 +75,7 @@ public class MuscleWithAnim : MonoBehaviour
 
     private void DeactivateMuscle()
     {
+        isActive = false;
         //When deactivating, use lowest possible muscle force of 0.01f and do not multiply with strength
         muscle = new Muscle2(0.01f);
         double force = muscle.step(0.01f, Time.fixedDeltaTime);
@@ -93,6 +98,13 @@ public class MuscleWithAnim : MonoBehaviour
     //Drawing the muscle in the scene for visualization
     private void DrawMuscleSegment(Transform point1, Transform point2)
     {
-        Debug.DrawLine(point1.transform.position, point2.transform.position, Color.red);
+        //Draw the muscle
+        Debug.DrawLine(point1.transform.position, point2.transform.position, isActive ? Color.red : Color.green);
+
+        //Draw the target length
+        Vector3 direction = a2.position - a1.position;
+        Vector3 offset = Vector3.right * 0.01f;
+        Debug.DrawLine(a1.position + offset, (a1.position + direction.normalized * targetLength) + offset,Color.cyan);
+
     }
 }
