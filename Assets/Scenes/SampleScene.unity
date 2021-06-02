@@ -19111,7 +19111,7 @@ Transform:
   m_GameObject: {fileID: 1062489058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.05, z: 0}
-  m_LocalScale: {x: 0.92947555, y: 0.13723, z: 1.0748274}
+  m_LocalScale: {x: 0.92947555, y: 0.13723, z: 0.7172861}
   m_Children: []
   m_Father: {fileID: 1869724322}
   m_RootOrder: 4
@@ -19933,13 +19933,13 @@ MonoBehaviour:
   leftEdges: []
   pairs:
   - musclesYZ:
-    - {fileID: 1149062215}
     - {fileID: 361633935}
+    - {fileID: 1149062215}
     musclesZX: []
     musclesXY: []
   - musclesYZ:
-    - {fileID: 779051292}
     - {fileID: 557829721}
+    - {fileID: 779051292}
     musclesZX: []
     musclesXY: []
 --- !u!114 &1083311690
@@ -20177,7 +20177,7 @@ Transform:
   m_GameObject: {fileID: 1091714265}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.07, y: -1.0400009, z: -0.016000748}
-  m_LocalScale: {x: 0.92754805, y: 0.13723, z: 1.016017}
+  m_LocalScale: {x: 0.92754805, y: 0.13723, z: 0.69714004}
   m_Children: []
   m_Father: {fileID: 1898848629}
   m_RootOrder: 4
@@ -21208,7 +21208,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138415497}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 7
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
