@@ -49,15 +49,9 @@ public class MatrixTools : MonoBehaviour
         int cA = A.GetLength(1);
         int rB = B.GetLength(0);
         int cB = B.GetLength(1);
-        float[,] C = new float[cA, cB];
-
-        Debug.Log("rA: " + A.GetLength(0));
-        Debug.Log("cA: " + A.GetLength(1));
-        Debug.Log("rB: " + B.GetLength(0));
-        Debug.Log("cB: " + B.GetLength(1));
+        float[,] C = new float[rA, cB];
 
         Debug.Log("C ARRAY: " + C.GetLength(0) + " " + C.GetLength(1));
-        
         if (cA == rB)
         {
             Debug.Log("EIIIIIIIIIIIIIII");
@@ -65,10 +59,7 @@ public class MatrixTools : MonoBehaviour
             {
                 for (int j = 0; j < cB; j++)
                 {
-                    Debug.Log("HERE: " + i);
-                    Debug.Log("HERE2: " + j);
-                    Debug.Log("J: " + j);
-                    Debug.Log("cB: " + cB);
+
                     C[i, j] = 0;
                     for (int k = 0; k < cA; k++) // OR k<b.GetLength(0)
                         C[i, j] += A[i, k] * B[k, j];

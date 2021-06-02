@@ -73,10 +73,11 @@ public class IK_Test_Muscle : MonoBehaviour
         supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
         supportPolyGenObj.GenerateNewPolygon();
         supportPolyCol = supportPolyGenObj.GetComponent<Collider>();*/
+        
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         targetPos = target.transform.position;
         if (startJT_Method_Flag)
@@ -84,7 +85,7 @@ public class IK_Test_Muscle : MonoBehaviour
             iterate_IK();
         }
         start_IK();
-        
+
         //CoM - Support poly things
         /*CoM = CalculateCenterOfMass();
         CoMHit = GetCoMHit();*/
@@ -98,7 +99,7 @@ public class IK_Test_Muscle : MonoBehaviour
 
         List<float> tempAngels = new List<float>();
         for(int i=0;i< pairs.Length; i++)
-        {
+        {   //YZ
             Vector3 body1 = pairs[i].musclesYZ[0].rb1.transform.position;
             Vector3 body2 = pairs[i].musclesYZ[0].rb2.transform.position;
             tempAngels.Add(calculateAngle(Vector3.right, body2, body1));
@@ -112,6 +113,7 @@ public class IK_Test_Muscle : MonoBehaviour
     private void iterate_IK()
     {
         Transform endeffector = rigidbodyList.Last().transform;
+        Debug.Log(rigidbodyList.Last().name);
         if (Mathf.Abs(Vector3.Distance(endeffector.position, target.transform.position)) > EPS)
         {
             JacobianIK();
@@ -119,6 +121,7 @@ public class IK_Test_Muscle : MonoBehaviour
         else
         {
             Debug.Log("Cycle Count: " + count.ToString());
+            Debug.Log("TARGET REAACVHED!!!");
             startJT_Method_Flag = false;
         }
         if (count >= countMax)
@@ -141,8 +144,9 @@ public class IK_Test_Muscle : MonoBehaviour
         }
 
         // update angles
+        //rotateLinks2(angleDiff);
+        //rotateLinksTest2(angleDiff);
         rotateLinks2(angleDiff);
-        //rotateLinks(angleDiff);
 
         count++;
     }
@@ -176,10 +180,11 @@ public class IK_Test_Muscle : MonoBehaviour
 
         List<Vector3> tempCrosses = new List<Vector3>();
         for (int i = 0; i < pairs.Length; i++)
-        {
+        {   //YZ
             Transform body1 = pairs[i].musclesYZ[0].rb1.transform;
             Transform body2 = pairs[i].musclesYZ[0].rb2.transform;
             Transform endEffector = rigidbodyList.Last().transform;
+            Debug.Log(rigidbodyList.Last().name);
             tempCrosses.Add(Vector3.Cross(body1.right, (endEffector.position - body1.position)));
             tempCrosses.Add(Vector3.Cross(body1.up, (endEffector.position - body1.position)));
             tempCrosses.Add(Vector3.Cross(body1.forward, (endEffector.position - body1.position)));
@@ -206,7 +211,7 @@ public class IK_Test_Muscle : MonoBehaviour
         float[] displayAngles = new float[angleDiff.Length];
         Transform endEffector = rigidbodyList.Last().transform;
         for (int i = 0; i < pairs.Length; i++)
-        {
+        {   //YZ
             Transform body1 = pairs[i].musclesYZ[0].rb1.transform;
             Transform body2 = pairs[i].musclesYZ[0].rb2.transform;
             float currAngleYZ = calculateAngle(Vector3.right, body2.position, body1.position);
@@ -217,9 +222,18 @@ public class IK_Test_Muscle : MonoBehaviour
             displayAngles[i * 3 + 0] = angleDiff[i * 3 + 0] + currAngleYZ;
             displayAngles[i * 3 + 1] = angleDiff[i * 3 + 1] + currAngleZX;
             displayAngles[i * 3 + 2] = angleDiff[i * 3 + 2] + currAngleXY;
-
+            Debug.Log("PAIRS: " + i);
             //Send the three new angels to the responsible muscleJoint and hope it can work some magic...
             ActivateMusclesJoint(new float[] { angleDiff[i * 3 + 0], angleDiff[i * 3 + 1], angleDiff[i * 3 + 2] }, pairs[i]);
+            /*Vector3 crossAxis = Vector3.Cross(pairs[i].musclesYZ[0].rb1.transform.right, (pairs[i].musclesYZ[0].rb1.transform.position - pairs[i].musclesYZ[0].rb1.transform.position).normalized);
+
+            if (angleDiff[i] != 0)
+                pairs[i].musclesYZ[0].rb1.transform.RotateAround(pairs[i].musclesYZ[0].rb1.transform.position, crossAxis, angleDiff[i]);
+
+            if (i < rigidbodyList.Count - 2)
+                updateLinkPos(i, joints[i].transform.position, crossAxis, angleDiff[i]);
+            if (i >= joints.Length - 2) // end effector
+                joints[i + 1].transform.position = jointRots[i].transform.position;*/
         }
     }
 
@@ -228,28 +242,33 @@ public class IK_Test_Muscle : MonoBehaviour
         //YZ
         if (joint.musclesYZ != null && joint.musclesYZ.Length > 0)
         {
-            joint.musclesYZ[0].targetLength = angles[0] <= 0 ? 0 : GetMuscleLengthFromAngle(joint.musclesYZ[0], 179);
-            joint.musclesYZ[1].targetLength = angles[0] >= 0 ? 0 : GetMuscleLengthFromAngle(joint.musclesYZ[1], 179);
+            joint.musclesYZ[0].targetLength = angles[0] <= 0 ? 0.1f : GetMuscleLengthFromAngle(joint.musclesYZ[0], 179);
+            joint.musclesYZ[1].targetLength = angles[0] >= 0 ? 0.1f : GetMuscleLengthFromAngle(joint.musclesYZ[1], 179);
             joint.musclesYZ[0].Activate();
             joint.musclesYZ[1].Activate();
+            Debug.Log("TARGET 0: " + joint.musclesYZ[0].targetLength);
+            Debug.Log("TARGET 1: " + joint.musclesYZ[1].targetLength);
         }
 
         //ZX
         if (joint.musclesZX != null && joint.musclesZX.Length > 0)
         {
-            joint.musclesZX[0].targetLength = angles[1] <= 0 ? 0 : GetMuscleLengthFromAngle(joint.musclesZX[0], 179);
-            joint.musclesZX[1].targetLength = angles[1] >= 0 ? 0 : GetMuscleLengthFromAngle(joint.musclesZX[1], 179);
+            joint.musclesZX[0].targetLength = angles[1] <= 0 ? 0.1f : GetMuscleLengthFromAngle(joint.musclesZX[0], 179);
+            joint.musclesZX[1].targetLength = angles[1] >= 0 ? 0.1f : GetMuscleLengthFromAngle(joint.musclesZX[1], 179);
             joint.musclesZX[0].Activate();
             joint.musclesZX[1].Activate();
+            Debug.Log("ZX 0 ACTIVATED");
+            Debug.Log("ZX 1 ACTIVATED");
         }
 
         //XY
         if(joint.musclesXY != null && joint.musclesXY.Length > 0)
         {
-            joint.musclesXY[0].targetLength = angles[2] <= 0 ? 0 : GetMuscleLengthFromAngle(joint.musclesXY[0], 179);
-            joint.musclesXY[1].targetLength = angles[2] >= 0 ? 0 : GetMuscleLengthFromAngle(joint.musclesXY[1], 179);
+            joint.musclesXY[0].targetLength = angles[2] <= 0 ? 0.1f : GetMuscleLengthFromAngle(joint.musclesXY[0], 179);
+            joint.musclesXY[1].targetLength = angles[2] >= 0 ? 0.1f : GetMuscleLengthFromAngle(joint.musclesXY[1], 179);
             joint.musclesXY[0].Activate();
             joint.musclesXY[1].Activate();
+            Debug.Log("TARGET 2: " + joint.musclesXY[0].targetLength);
         }
     }
     private float GetMuscleLengthFromAngle(MuscleWithAnim m, float newAngle)

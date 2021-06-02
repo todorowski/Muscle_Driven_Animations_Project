@@ -68,9 +68,6 @@ public class MuscleWithAnim : MonoBehaviour
         Vector3 forceOnRb1 = (a2.transform.position - a1.transform.position) * (float)force * strength;
         rb2.AddForceAtPosition(forceOnRb2, a2.transform.position);
         rb1.AddForceAtPosition(forceOnRb1, a1.transform.position);
-
-        Debug.Log("activate force at rb1: " + forceOnRb1);
-        Debug.Log("activate force at rb2: " + forceOnRb2);
     }
 
     private void DeactivateMuscle()
@@ -84,10 +81,6 @@ public class MuscleWithAnim : MonoBehaviour
         Vector3 forceOnRb1 = (a2.transform.position - a1.transform.position) * (float)force;
         rb2.AddForceAtPosition(forceOnRb2, a2.transform.position);
         rb1.AddForceAtPosition(forceOnRb1, a1.transform.position);
-
-
-        Debug.Log("deactive force at rb1: " + forceOnRb1);
-        Debug.Log("deactivate force at rb2: " + forceOnRb2);
     }
 
     private void LateUpdate()
