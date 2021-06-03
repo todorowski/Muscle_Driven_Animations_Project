@@ -7,19 +7,13 @@ using System.Linq;
 public class MuscleAnimationController : MonoBehaviour
 {
     public MuscleAnimation animationObject;
-    //public GameObject endEffector_r;
-    //public GameObject endEffector_l;
     public GameObject supportPolyGen;
 
     public Transform[] rightEdges;
     public Transform[] leftEdges;
 
     public Transform ragdoll;
-    //public Transform forcePos1;
-    //public Transform forcePos2;
-    //public Transform footPos1;
-    //public Transform footPos2;
-    //public float forceMultiplier;
+
     public float compensationMultiplier;
     public float footSupportForce;
     public float hipsCompensationForce;
@@ -35,29 +29,17 @@ public class MuscleAnimationController : MonoBehaviour
     //Initial center of mass
     Vector3 CoM = Vector3.zero;
 
-    float leftFootTargetDist = 0.0f;
-    float rightFootTargetDist = 0.0f;
-
     List<MuscleWithAnim> ragdollMuscles = new List<MuscleWithAnim>();
     List<Rigidbody> rigidbodyList;
-    bool r_grounded, l_grounded;
 
     public Rigidbody addForce;
 
-    bool balancingLeft;
-    bool balancingRight;
-
     //test
-    public GameObject test;
+    //public GameObject test;
 
     SupportPolygonGenerator supportPolyGenObj;
 
     Vector3 CoMStartPos;
-
-    Vector3 inertia;
-    Vector3 angularVel;
-    Vector3 angularAcc;
-    Vector3 final;
     public Rigidbody hips;
 
     void Start()
@@ -69,11 +51,6 @@ public class MuscleAnimationController : MonoBehaviour
         {
             rb.centerOfMass = new Vector3(0, 0, 0);
             rb.inertiaTensor = new Vector3(1, 1, 1);
-            /*if (rb.GetComponent<Collider>() != null)
-            {
-                //ignore collision on player layer
-                Physics.IgnoreLayerCollision(6,6);
-            }*/
         }
         
         CalculateCenterOfMass();
@@ -92,7 +69,6 @@ public class MuscleAnimationController : MonoBehaviour
         supportPolyGenObj.GenerateNewPolygon();
 
         CheckIfCoMIsBalanced();
-
     }
 
     void FixedUpdate()
