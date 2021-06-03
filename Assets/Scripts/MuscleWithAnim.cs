@@ -97,7 +97,7 @@ public class MuscleWithAnim : MonoBehaviour
         //Draw the target length
         Vector3 direction = a2.position - a1.position;
         Vector3 offset = Vector3.right * 0.01f;
-        Debug.DrawLine(a1.position + offset, (a1.position + direction.normalized * targetLength) + offset,Color.cyan);
+        //Debug.DrawLine(a1.position + offset, (a1.position + direction.normalized * targetLength) + offset,Color.cyan);
 
     }
 }
