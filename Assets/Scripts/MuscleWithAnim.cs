@@ -41,7 +41,7 @@ public class MuscleWithAnim : MonoBehaviour
 
     public void Activate()
     {
-        
+        Debug.Log("ACTIVATION VALUE: " + activationValue);
         if (activationValue > 0)
         {
             DeactivateMuscle();
@@ -63,9 +63,10 @@ public class MuscleWithAnim : MonoBehaviour
         }
         muscle = new Muscle2(activationValue);
         double force = muscle.step(activationValue, Time.fixedDeltaTime);
-
+        
         Vector3 forceOnRb2 = (a1.transform.position - a2.transform.position) * (float)force * strength;
         Vector3 forceOnRb1 = (a2.transform.position - a1.transform.position) * (float)force * strength;
+
         rb2.AddForceAtPosition(forceOnRb2, a2.transform.position);
         rb1.AddForceAtPosition(forceOnRb1, a1.transform.position);
     }
@@ -97,7 +98,7 @@ public class MuscleWithAnim : MonoBehaviour
         //Draw the target length
         Vector3 direction = a2.position - a1.position;
         Vector3 offset = Vector3.right * 0.01f;
-        //Debug.DrawLine(a1.position + offset, (a1.position + direction.normalized * targetLength) + offset,Color.cyan);
+        Debug.DrawLine(a1.position + offset, (a1.position + direction.normalized * targetLength) + offset,Color.cyan);
 
     }
 }

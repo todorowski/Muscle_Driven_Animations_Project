@@ -26,10 +26,13 @@ public class MuscleBasedPD
     {
         //Error signal
         float error = setpoint - measurement;
+        float derivative;
         integral += error * timeFrame;
-        float derivative = (error - lastError) / timeFrame;
+        
+        derivative = (error - lastError) / timeFrame;
         lastError = error;
-
+        Debug.Log("ERROR FROM PD: " + error * Kp + integral * Ki + derivative * Kd);
         return error * Kp + integral * Ki + derivative * Kd;
+        
     }
 }

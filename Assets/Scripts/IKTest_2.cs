@@ -146,15 +146,15 @@ public class IKTest_2 : MonoBehaviour
 
         //dO = Jt * V;
         float[,] dO = MatrixTools.MultiplyMatrix(Jt, new float[,] { { V.x }, { V.y }, { V.z } });
-        return new float[] { dO[0, 0] };
+        return new float[] { dO[0, 0], dO[1, 0], dO[2, 0] };
     }
 
     private float[,] GetJacobianTranspose()
     {
 
         Vector3 J_A = Vector3.Cross(joints[0].transform.forward, (joints[joints.Length - 1].transform.position - joints[0].transform.position));
-        //Vector3 J_B = Vector3.Cross(joints[1].transform.forward, (joints[joints.Length - 1].transform.position - joints[1].transform.position));
-        //Vector3 J_C = Vector3.Cross(joints[2].transform.forward, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
+        Vector3 J_B = Vector3.Cross(joints[1].transform.forward, (joints[joints.Length - 1].transform.position - joints[1].transform.position));
+        Vector3 J_C = Vector3.Cross(joints[2].transform.forward, (joints[joints.Length - 1].transform.position - joints[2].transform.position));
 
         float[,] matrix = new float[3, 3];
 

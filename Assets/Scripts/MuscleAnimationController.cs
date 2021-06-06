@@ -22,6 +22,8 @@ public class MuscleAnimationController : MonoBehaviour
     public Transform[] footSupportPositions;
     public Rigidbody leftFoot;
     public Rigidbody rightFoot;
+    public Rigidbody hips;
+    public Rigidbody addForce;
 
     //Start of the animation timeline
     public float animationHead = 0.0f;
@@ -32,21 +34,17 @@ public class MuscleAnimationController : MonoBehaviour
     List<MuscleWithAnim> ragdollMuscles = new List<MuscleWithAnim>();
     List<Rigidbody> rigidbodyList;
 
-    public Rigidbody addForce;
-
-    //test
-    //public GameObject test;
-
     SupportPolygonGenerator supportPolyGenObj;
-
     Vector3 CoMStartPos;
-    public Rigidbody hips;
+    
 
     void Start()
     {
+        //Keep track of all muscles and rigidbodies in ragdoll
         rigidbodyList = ragdoll.GetComponentsInChildren<Rigidbody>().ToList();
         ragdollMuscles = ragdoll.GetComponentsInChildren<MuscleWithAnim>().ToList();
 
+        //Don't let Unity calculate these, prevents weird behavior
         foreach(Rigidbody rb in rigidbodyList)
         {
             rb.centerOfMass = new Vector3(0, 0, 0);
@@ -68,7 +66,7 @@ public class MuscleAnimationController : MonoBehaviour
         AddGravityCompensation();
         supportPolyGenObj.GenerateNewPolygon();
 
-        CheckIfCoMIsBalanced();
+        RebalanceCoM();
     }
 
     void FixedUpdate()
@@ -122,14 +120,12 @@ public class MuscleAnimationController : MonoBehaviour
         rightFoot.AddForceAtPosition(Vector3.down * footSupportForce, footSupportPositions[1].position);
     }
 
-    bool CheckIfCoMIsBalanced()
+    void RebalanceCoM()
     {
         RaycastHit hit;
-        bool balanced;
         
         if(Physics.Raycast(CoM, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("SupportPolygon")))
         {
-            //called in update so this value will change, save value from start
             Vector3 hitPointInCol = hit.point;
             Debug.Log("hit in collider: " + hit.point);
 
@@ -146,13 +142,7 @@ public class MuscleAnimationController : MonoBehaviour
                 Debug.DrawRay(CoM, CoMMovementDir * 10f, Color.magenta);
                 Debug.DrawRay(CoM, compForce * 10f, Color.blue);
             }
-            balanced = true;
-        }
-        else
-        {
-            balanced = false;
-        }
-        return balanced;   
+        } 
     }
 
     private Vector3 GetHitPos()

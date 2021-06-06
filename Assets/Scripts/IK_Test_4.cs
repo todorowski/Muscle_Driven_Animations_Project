@@ -5,6 +5,7 @@ using System.Linq;
 
 public class IK_Test_4 : MonoBehaviour
 {
+    public List<Vector3Int> allowedAxisPerJoint = new List<Vector3Int>();
     public GameObject target;
     //Vector3 target;
     public int countMax = 1000;
@@ -30,10 +31,13 @@ public class IK_Test_4 : MonoBehaviour
 
     public Transform[] rightEdges;
     public Transform[] leftEdges;
+    public List<GameObject> joints;
 
     private Vector3 CoMHit = Vector3.zero;
     private Vector3 CoM = Vector3.zero;
     Vector3 targetPos = Vector3.zero;
+
+    private GameObject[] jointRots;
 
     [SerializeField]
     private MuscleJoint[] pairs;
@@ -56,15 +60,15 @@ public class IK_Test_4 : MonoBehaviour
         }
         Vector3 targetPos = target.transform.position;
 
-        //jointRots = new GameObject[joints.Length - 1];
+        jointRots = new GameObject[joints.Count - 1];
 
-        /*for (int i = 0; i < jointRots.Length; i++)
+        for (int i = 0; i < jointRots.Length; i++)
         {
             GameObject tmp = new GameObject(joints[i + 1].name + "_Rot");
             tmp.transform.position = joints[i + 1].transform.position;
             tmp.transform.parent = joints[i].transform;
             jointRots[i] = tmp;
-        }*/
+        }
 
         //Get CoM
         /*CoM = CalculateCenterOfMass();
@@ -99,11 +103,11 @@ public class IK_Test_4 : MonoBehaviour
         List<float> tempAngels = new List<float>();
         for (int i = 0; i < rigidbodyList.Count - 1; i++)
         {   //YZ
-            Vector3 body1 = rigidbodyList[i].transform.position;
-            Vector3 body2 = rigidbodyList[i + 1].transform.position;
-            tempAngels.Add(calculateAngle(Vector3.right, body2, body1));
-            tempAngels.Add(calculateAngle(Vector3.up, body2, body1));
-            tempAngels.Add(calculateAngle(Vector3.forward, body2, body1));
+            Vector3 body2 = rigidbodyList[i].transform.position;
+            Vector3 body1 = rigidbodyList[i + 1].transform.position;
+            tempAngels.Add(calculateAngle(Vector3.right, body1, body2));
+            tempAngels.Add(calculateAngle(Vector3.up, body1, body2));
+            tempAngels.Add(calculateAngle(Vector3.forward, body1, body2));
         }
         angles = tempAngels.ToArray();
         Debug.Log("angles array: " + angles.Length);
@@ -112,7 +116,7 @@ public class IK_Test_4 : MonoBehaviour
     private void iterate_IK()
     {
         Transform endeffector = rigidbodyList.Last().transform;
-        Debug.Log(rigidbodyList.Last().name);
+        Debug.Log(joints.Last().name);
         if (Mathf.Abs(Vector3.Distance(endeffector.position, target.transform.position)) > EPS)
         {
             JacobianIK();
@@ -153,15 +157,21 @@ public class IK_Test_4 : MonoBehaviour
         float[,] Jt = GetJacobianTranspose();
 
         Vector3 V = (target.transform.position - rigidbodyList.Last().transform.position);
+        Debug.Log("LAST: " + joints[2]);
         //Vector3 V = new Vector3(GetCoMHit().x, 0.0f, GetCoMHit().z) - new Vector3(target.x, 0.0f, target.z);
         //multiplicera min jacobian tyranspose med v
 
         //dO = Jt * V;
-        float[,] dO = MatrixTools.MultiplyMatrix(Jt, new float[,] { { V.x }, { V.y }, { V.z } });
+        float[,] dO = MatrixTools.MultiplyMatrix(Jt, new float[,] { { V.x }, { V.y }, { V.z }});
         //varje float är en kolumn i matrisen
         //varför förasta vädet i varje kolumn?
         //testa ta ut alla värden? 
-        return new float[] { dO[0, 0], dO[1, 0], dO[2, 0] };
+        List<float> angles = new List<float>();
+        for(int i = 0; i < (rigidbodyList.Count - 1) * 3; i++)
+        {
+            angles.Add(dO[i, 0]);
+        }
+        return angles.ToArray();
     }
 
     private float[,] GetJacobianTranspose()
@@ -178,9 +188,7 @@ public class IK_Test_4 : MonoBehaviour
         for (int i = 0; i < rigidbodyList.Count - 1; i++)
         {   //YZ
             Transform body1 = rigidbodyList[i].transform;
-            Transform body2 = rigidbodyList[i + 1].transform;
             Transform endEffector = rigidbodyList.Last().transform;
-            Debug.Log(rigidbodyList.Last().name);
             tempCrosses.Add(Vector3.Cross(body1.right, (endEffector.position - body1.position)));
             tempCrosses.Add(Vector3.Cross(body1.up, (endEffector.position - body1.position)));
             tempCrosses.Add(Vector3.Cross(body1.forward, (endEffector.position - body1.position)));
@@ -208,28 +216,30 @@ public class IK_Test_4 : MonoBehaviour
 
         for (int i = 0; i < rigidbodyList.Count - 1; i++)
         {
-            Vector3 upDir = rigidbodyList[i].transform.right;
+            Vector3 YZDir = rigidbodyList[i].transform.right;
+            Vector3 ZXDir = rigidbodyList[i].transform.up;
+            Vector3 XYDir = rigidbodyList[i].transform.forward;
 
-            Vector3 crossAxis = Vector3.Cross(upDir, (rigidbodyList[i + 1].transform.position - rigidbodyList[i].transform.position).normalized);
-            float currAngle = calculateAngle(Vector3.up, rigidbodyList[i + 1].transform.position, rigidbodyList[i].transform.position);
-            float newAngle = angleDiff[i];
-            displayAngles[i] = angleDiff[i] + currAngle;
-
-            if (newAngle != 0)
+            if (angleDiff[i] != 0)
             {
                 Debug.Log("NEWANGLE: " + angleDiff[i]);
                 Debug.Log("JOINT TO ROTATE: " + rigidbodyList[i]);
-                rigidbodyList[i].transform.RotateAround(rigidbodyList[i].transform.position, crossAxis, newAngle);
+                //rtotate around transform.position, changec crossaxis according to angkle
+                if(allowedAxisPerJoint[i].x > 0)
+                    rigidbodyList[i].transform.RotateAround(rigidbodyList[i].transform.position, YZDir, angleDiff[i * 3 + 0]);
+                if (allowedAxisPerJoint[i].y > 0)
+                    rigidbodyList[i].transform.RotateAround(rigidbodyList[i].transform.position, ZXDir, angleDiff[i * 3 + 1]);
+                if (allowedAxisPerJoint[i].z > 0)
+                    rigidbodyList[i].transform.RotateAround(rigidbodyList[i].transform.position, XYDir, angleDiff[i * 3 + 2]);
             }
             else
             {
                 Debug.Log("ANGLE IS 0!!!!");
             }
-                
-
             //Debug.Log("joint " + (i + 1).ToString() + ": New angle Value: " + angleDiff[i].ToString());
         }
     }
+
 }
 
 

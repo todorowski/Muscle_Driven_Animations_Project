@@ -56,7 +56,8 @@ public class Muscle2
         this.v_CE = v_CE;
 
         l_CE += this.v_CE * dt;
-        return a_mtc;
+
+        return (float)a_mtc;
     }
 
     //The serial damping element is arranged in parallel to the serial elastic element
@@ -220,10 +221,19 @@ public class Muscle2
     private double getl_CE_init(double q)
     {
         q = Mathf.Min(Mathf.Max((float)q, 0.001f), 1.0f);
+        
         q *= 100;
+     
         q = Mathf.Round((float)q);
-        Debug.Log("INITIAL LENTHS: " + initialLengths[(int)(q - 1)]);
-        return initialLengths[(int)(q - 1)];
+
+        int value = ((int)q - 1);
+        if (value < 1)
+            value = 1;
+        if (q > 100)
+            value = 100;
+
+        return initialLengths[value];
+
     }
 
     static double[] initialLengths = new double[] {
