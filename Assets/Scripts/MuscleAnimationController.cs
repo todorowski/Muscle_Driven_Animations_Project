@@ -51,22 +51,22 @@ public class MuscleAnimationController : MonoBehaviour
             rb.inertiaTensor = new Vector3(1, 1, 1);
         }
         
-        CalculateCenterOfMass();
+        //CalculateCenterOfMass();
 
-        supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
-        supportPolyGenObj.GenerateNewPolygon();
+        //supportPolyGenObj = supportPolyGen.GetComponent<SupportPolygonGenerator>();
+        //supportPolyGenObj.GenerateNewPolygon();
 
-        CoMStartPos = GetHitPos();
+        //CoMStartPos = GetHitPos();
         Debug.Log("COM start pos: " + CoMStartPos);
     }
 
     private void Update()
     {
-        CalculateCenterOfMass();
-        AddGravityCompensation();
-        supportPolyGenObj.GenerateNewPolygon();
+        //CalculateCenterOfMass();
+        //AddGravityCompensation();
+        //supportPolyGenObj.GenerateNewPolygon();
 
-        RebalanceCoM();
+        //RebalanceCoM();
     }
 
     void FixedUpdate()

@@ -31,7 +31,6 @@ public class MuscleBasedPD
         
         derivative = (error - lastError) / timeFrame;
         lastError = error;
-        Debug.Log("ERROR FROM PD: " + error * Kp + integral * Ki + derivative * Kd);
         return error * Kp + integral * Ki + derivative * Kd;
         
     }
