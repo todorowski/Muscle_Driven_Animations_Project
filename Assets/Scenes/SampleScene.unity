@@ -4905,7 +4905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d575ee804b37b54c8a30a97d66544b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationObject: {fileID: 11400000, guid: e1231920deed76a46a79f4a38d93f983, type: 2}
+  animationObject: {fileID: 11400000, guid: cbbce0e53c880534588166d7aafa9787, type: 2}
   supportPolyGen: {fileID: 1109994853}
   rightEdges: []
   leftEdges: []
