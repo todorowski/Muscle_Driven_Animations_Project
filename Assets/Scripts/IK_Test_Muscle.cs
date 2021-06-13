@@ -111,7 +111,6 @@ public class IK_Test_Muscle : MonoBehaviour
     private void iterate_IK()
     {
         Transform endeffector = rigidbodyList.Last().transform;
-        Debug.Log(rigidbodyList.Last().name);
         if (Mathf.Abs(Vector3.Distance(endeffector.position, target.transform.position)) > EPS)
         {
             JacobianIK();
@@ -119,7 +118,6 @@ public class IK_Test_Muscle : MonoBehaviour
         else
         {
             Debug.Log("Cycle Count: " + count.ToString());
-            Debug.Log("TARGET REAACVHED!!!");
             startJT_Method_Flag = false;
         }
         if (count >= countMax)
@@ -254,13 +252,11 @@ public class IK_Test_Muscle : MonoBehaviour
             if(angles[0] > 0)
             {
                 joint.musclesYZ[0].targetLength = GetMuscleLengthFromAngle(joint.musclesYZ[0], angles[0]);
-                Debug.Log(joint.musclesYZ[0].name);
                 joint.musclesYZ[0].Activate();
             }
             else
             {
                 joint.musclesYZ[1].targetLength = GetMuscleLengthFromAngle(joint.musclesYZ[1], Mathf.Abs(angles[0]));
-                Debug.Log(joint.musclesYZ[1].name);
                 joint.musclesYZ[1].Activate();
             }
         }
@@ -274,13 +270,11 @@ public class IK_Test_Muscle : MonoBehaviour
             if (angles[1] > 0)
             {
                 joint.musclesZX[0].targetLength = GetMuscleLengthFromAngle(joint.musclesZX[0], angles[1]);
-                Debug.Log(joint.musclesZX[0].name);
                 joint.musclesZX[0].Activate();
             }
             else
             {
                 joint.musclesZX[1].targetLength = GetMuscleLengthFromAngle(joint.musclesZX[1], Mathf.Abs(angles[1]));
-                Debug.Log(joint.musclesZX[1].name);
                 joint.musclesZX[1].Activate();
             }
         }
@@ -294,13 +288,11 @@ public class IK_Test_Muscle : MonoBehaviour
             if (angles[2] > 0)
             {
                 joint.musclesXY[0].targetLength = GetMuscleLengthFromAngle(joint.musclesXY[0], angles[2]);
-                Debug.Log(joint.musclesXY[0].name);
                 joint.musclesXY[0].Activate();
             }
             else
             {
                 joint.musclesXY[1].targetLength = GetMuscleLengthFromAngle(joint.musclesXY[1], Mathf.Abs(angles[2]));
-                Debug.Log(joint.musclesXY[1].name);
                 joint.musclesXY[1].Activate();
             }
         }

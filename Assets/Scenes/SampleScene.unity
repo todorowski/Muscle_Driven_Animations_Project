@@ -4889,7 +4889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563f880ecfb8a24469de369649b7efc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationObject: {fileID: 0}
+  animationObject: {fileID: 11400000, guid: e1231920deed76a46a79f4a38d93f983, type: 2}
   ragdollParent: {fileID: 615651448}
   keyFrameButton: {fileID: 206501076}
   animationHead: 0
@@ -4905,7 +4905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d575ee804b37b54c8a30a97d66544b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationObject: {fileID: 11400000, guid: cbbce0e53c880534588166d7aafa9787, type: 2}
+  animationObject: {fileID: 11400000, guid: e1231920deed76a46a79f4a38d93f983, type: 2}
   supportPolyGen: {fileID: 1109994853}
   rightEdges: []
   leftEdges: []
@@ -4922,6 +4922,19 @@ MonoBehaviour:
   hips: {fileID: 615651487}
   addForce: {fileID: 615651475}
   animationHead: 0
+--- !u!114 &321761299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321761296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491da51b193152c45b4d9a890e1b7ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ragdoll: {fileID: 321761296}
 --- !u!1 &326675802
 GameObject:
   m_ObjectHideFlags: 0
@@ -5067,7 +5080,7 @@ MonoBehaviour:
   rb2: {fileID: 615651482}
   a1: {fileID: 1829088440}
   a2: {fileID: 1284316318}
-  strength: 100
+  strength: 200
   name: L_Biceps
   Kp: 1
   Kd: 0.01
@@ -7136,7 +7149,7 @@ MonoBehaviour:
   rb2: {fileID: 615651472}
   a1: {fileID: 1446739543}
   a2: {fileID: 1971497491}
-  strength: 100
+  strength: 200
   name: R_Biceps
   Kp: 1
   Kd: 0.01
@@ -8391,7 +8404,7 @@ MonoBehaviour:
   rb2: {fileID: 615651501}
   a1: {fileID: 1276813759}
   a2: {fileID: 95629053}
-  strength: 160
+  strength: 200
   name: L_Ankle
   Kp: 1
   Kd: 0.01
@@ -9289,11 +9302,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -90
+    limit: -90.827095
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 0
+    limit: 1.6207579
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
@@ -9392,7 +9405,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 50
+    limit: 67.8507
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
@@ -9532,11 +9545,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -97.694275
+    limit: -3.7785423
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: -0.10834503
+    limit: 82.371895
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
@@ -17670,7 +17683,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.018668544, y: 0.96371365, z: -0.2659723, w: -0.012897229}
-  m_LocalPosition: {x: 41.09, y: 3.1, z: -17.46}
+  m_LocalPosition: {x: 37.698, y: 2.943, z: -17.916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -17689,7 +17702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 577509637688717600, guid: e10305a691d19674092eadfe14801a20, type: 3}
-  force: 1
+  force: 10
 --- !u!1 &963708396
 GameObject:
   m_ObjectHideFlags: 0
@@ -22271,7 +22284,7 @@ MonoBehaviour:
   rb2: {fileID: 615651493}
   a1: {fileID: 260732098}
   a2: {fileID: 1422764992}
-  strength: 160
+  strength: 200
   name: R_Ankle
   Kp: 1
   Kd: 0.01
@@ -22549,7 +22562,7 @@ MonoBehaviour:
   rb2: {fileID: 615651471}
   a1: {fileID: 77983115}
   a2: {fileID: 908936800}
-  strength: 100
+  strength: 200
   name: R_Shoulder
   Kp: 1
   Kd: 0.01
@@ -25950,7 +25963,7 @@ MonoBehaviour:
   rb2: {fileID: 615651481}
   a1: {fileID: 1059822666}
   a2: {fileID: 1078767016}
-  strength: 100
+  strength: 200
   name: L_Shoulder
   Kp: 1
   Kd: 0.01
@@ -26609,7 +26622,7 @@ MonoBehaviour:
   rb2: {fileID: 615651472}
   a1: {fileID: 815553919}
   a2: {fileID: 1339092332}
-  strength: 100
+  strength: 200
   name: R_Triceps
   Kp: 1
   Kd: 0.01
@@ -28503,7 +28516,7 @@ MonoBehaviour:
   rb2: {fileID: 615651482}
   a1: {fileID: 292485543}
   a2: {fileID: 24133411}
-  strength: 100
+  strength: 200
   name: L_Triceps
   Kp: 1
   Kd: 0.01
@@ -33723,7 +33736,7 @@ MonoBehaviour:
   rb2: {fileID: 615651501}
   a1: {fileID: 990832540}
   a2: {fileID: 1852383604}
-  strength: 160
+  strength: 200
   name: L_Knee
   Kp: 1
   Kd: 0.01
@@ -35486,7 +35499,7 @@ MonoBehaviour:
   rb2: {fileID: 615651493}
   a1: {fileID: 1111353073}
   a2: {fileID: 2055451041}
-  strength: 160
+  strength: 200
   name: R_Knee
   Kp: 1
   Kd: 0.01
