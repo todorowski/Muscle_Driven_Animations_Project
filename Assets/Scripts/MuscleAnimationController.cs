@@ -7,7 +7,7 @@ using System.Linq;
 public class MuscleAnimationController : MonoBehaviour
 {
     public MuscleAnimation animationObject;
-    public GameObject supportPolyGen;
+    //public GameObject supportPolyGen;
 
     public Transform[] rightEdges;
     public Transform[] leftEdges;
@@ -34,7 +34,6 @@ public class MuscleAnimationController : MonoBehaviour
     List<MuscleWithAnim> ragdollMuscles = new List<MuscleWithAnim>();
     List<Rigidbody> rigidbodyList;
 
-    SupportPolygonGenerator supportPolyGenObj;
     Vector3 CoMStartPos;
     
 

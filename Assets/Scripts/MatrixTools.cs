@@ -22,22 +22,11 @@ public class MatrixTools : MonoBehaviour
 
     public static float[,] PopulateMatrix(float[,] matrix, Vector3[] pos)
     {
-        //only supports 3x3 matrix?
         for (int i = 0; i < pos.Length; i++)
         {
             matrix[0, i] = pos[i].x;
             matrix[1, i] = pos[i].y;
             matrix[2, i] = pos[i].z;
-
-            
-            /*matrix[3, i] = pos[i].x;
-            matrix[4, i] = pos[i].y;
-            matrix[5, i] = pos[i].z;
-
-            /*matrix[0, i] = pos[i].x;
-            matrix[1, i] = pos[i].y;
-            matrix[2, i] = pos[i].z;*/
-
         }
 
         return matrix;
@@ -54,7 +43,6 @@ public class MatrixTools : MonoBehaviour
         Debug.Log("C ARRAY: " + C.GetLength(0) + " " + C.GetLength(1));
         if (cA == rB)
         {
-            Debug.Log("EIIIIIIIIIIIIIII");
             for (int i = 0; i < rA; i++)
             {
                 for (int j = 0; j < cB; j++)
